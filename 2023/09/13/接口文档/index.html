@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.2">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.13.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Alan</title>
+
+  
+    <meta name="description" content="用户管理接口注册接口请求方法：POST URL：&#x2F;api&#x2F;user&#x2F;register 参数:    参数名 类型 注释    username String 用户名   password String 密码   email String 邮箱   phone String 手机号   verification_code String 验证码短信验证码   响应数据：  成功返回  1234&amp;#12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alan">
+<meta property="og:url" content="https://www.alan.org.cn/2023/09/13/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/index.html">
+<meta property="og:site_name" content="Alan">
+<meta property="og:description" content="用户管理接口注册接口请求方法：POST URL：&#x2F;api&#x2F;user&#x2F;register 参数:    参数名 类型 注释    username String 用户名   password String 密码   email String 邮箱   phone String 手机号   verification_code String 验证码短信验证码   响应数据：  成功返回  1234&amp;#12">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-13T12:29:54.118Z">
+<meta property="article:modified_time" content="2023-09-13T12:29:54.118Z">
+<meta property="article:author" content="Alan">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://blog-alan.oss-cn-hangzhou.aliyuncs.com/head/heads.png">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header">
+
+<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://blog-alan.oss-cn-hangzhou.aliyuncs.com/head/heads.png" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Alan</div></a></div>
+
+
+<nav class="menu dis-select"><a class="nav-item" href="/index/">首页</a><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">项目</a></nav>
+</header>
+
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E6%8E%A5%E5%8F%A3"><span class="toc-text">用户管理接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E6%8E%A5%E5%8F%A3"><span class="toc-text">注册接口</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%8E%A5%E5%8F%A3"><span class="toc-text">获取短信验证码接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%99%BB%E9%99%86%E6%8E%A5%E5%8F%A3"><span class="toc-text">登陆接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%9B%BE%E5%BD%A2%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">获取图形验证码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B6%E8%97%8F%E6%8E%A5%E5%8F%A3"><span class="toc-text">收藏接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%B0%E6%94%B6%E8%97%8F%E5%A4%B9"><span class="toc-text">添加到收藏夹</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E6%94%B6%E8%97%8F%E5%A4%B9%E4%B8%AD%E7%A7%BB%E9%99%A4%E5%8D%9A%E5%AE%A2"><span class="toc-text">从收藏夹中移除博客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84%E6%94%B6%E8%97%8F%E5%A4%B9%E5%88%97%E8%A1%A8"><span class="toc-text">获取用户的收藏夹列表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E8%AE%BA%E6%8E%A5%E5%8F%A3"><span class="toc-text">评论接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E5%88%97%E8%A1%A8"><span class="toc-text">获取博客评论列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA"><span class="toc-text">发布博客评论</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA"><span class="toc-text">删除博客评论</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%81%E4%BF%A1"><span class="toc-text">私信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E7%A7%81%E4%BF%A1"><span class="toc-text">发送私信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%A7%81%E4%BF%A1%E5%88%97%E8%A1%A8"><span class="toc-text">获取私信列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%A7%81%E4%BF%A1"><span class="toc-text">删除私信</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2"><span class="toc-text">搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%8D%9A%E5%AE%A2"><span class="toc-text">搜索博客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E7%94%A8%E6%88%B7"><span class="toc-text">搜索用户</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%B9%E8%B5%9E"><span class="toc-text">点赞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%82%B9%E8%B5%9E%E5%8D%9A%E5%AE%A2"><span class="toc-text">点赞博客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E6%B6%88%E7%82%B9%E8%B5%9E%E5%8D%9A%E5%AE%A2"><span class="toc-text">取消点赞博客</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%9A%E5%AE%A2%E7%82%B9%E8%B5%9E%E5%88%97%E8%A1%A8"><span class="toc-text">获取博客点赞列表</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E6%8E%A8%E9%80%81%E6%8E%A5%E5%8F%A3"><span class="toc-text">文章推送接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0"><span class="toc-text">获取所有文章</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E5%8D%95%E7%AF%87%E6%96%87%E7%AB%A0"><span class="toc-text">获取单篇文章</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E7%9A%84%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0"><span class="toc-text">获取用户的所有文章</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E5%88%97%E8%A1%A8"><span class="toc-text">获取用户列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-text">更新用户信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="toc-text">删除用户</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E6%8E%A5%E5%8F%A3"><span class="toc-text">分析接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%EF%BC%9Aget"><span class="toc-text">请求方法：get</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E8%B7%AF%E5%BE%84"><span class="toc-text">请求路径:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%8E%B7%E5%8F%96%E5%88%86%E4%BA%AB%E7%BB%9F%E8%AE%A1%E6%95%B0%E6%8D%AE"><span class="toc-text">2. 获取分享统计数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">请求方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0-1"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-1"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-1"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-1"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E4%B8%BE%E6%8A%A5%E4%BF%A1%E6%81%AF"><span class="toc-text">1. 创建举报信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-2"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-2"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-2"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%A4%84%E7%90%86%E4%B8%BE%E6%8A%A5%E4%BF%A1%E6%81%AF"><span class="toc-text">2. 处理举报信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-1"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-1"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-3"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-3"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-3"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96%E4%B8%BE%E6%8A%A5%E4%BF%A1%E6%81%AF%E8%AF%A6%E6%83%85"><span class="toc-text">3. 获取举报信息详情</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-2"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-2"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-4"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-4"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-4"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%9B%E5%BB%BA%E9%80%9A%E7%9F%A5"><span class="toc-text">1. 创建通知</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-3"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-3"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-5"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-5"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-5"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%8E%B7%E5%8F%96%E9%80%9A%E7%9F%A5%E5%88%97%E8%A1%A8"><span class="toc-text">2. 获取通知列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-4"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-4"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-6"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-6"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-6"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%A0%87%E8%AE%B0%E9%80%9A%E7%9F%A5%E4%B8%BA%E5%B7%B2%E8%AF%BB"><span class="toc-text">3. 标记通知为已读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-5"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-5"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-7"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-7"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-7"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%8E%B7%E5%8F%96%E6%96%87%E7%AB%A0%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF"><span class="toc-text">1. 获取文章统计信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-6"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-6"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-8"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-8"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-8"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%8E%B7%E5%8F%96%E7%83%AD%E9%97%A8%E6%96%87%E7%AB%A0%E5%88%97%E8%A1%A8"><span class="toc-text">2. 获取热门文章列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-7"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-7"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-9"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-9"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-9"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96%E4%BD%9C%E8%80%85%E6%96%87%E7%AB%A0%E7%BB%9F%E8%AE%A1%E4%BF%A1%E6%81%AF"><span class="toc-text">3. 获取作者文章统计信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-8"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-8"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-10"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-10"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-10"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-text">1. 获取用户信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-9"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-9"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-11"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-11"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-11"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-text">2. 更新用户信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82"><span class="toc-text">请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0-2"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-12"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-12"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-12"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E6%96%87%E7%AB%A0%E5%88%97%E8%A1%A8"><span class="toc-text">3. 获取用户文章列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82-1"><span class="toc-text">请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0-3"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-13"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-13"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-13"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E5%88%97%E8%A1%A8"><span class="toc-text">1. 获取用户历史记录列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-10"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-10"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-14"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-14"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-14"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B7%BB%E5%8A%A0%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95"><span class="toc-text">2. 添加历史记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-11"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-11"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-15"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-15"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-15"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B8%85%E7%A9%BA%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95"><span class="toc-text">3. 清空历史记录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-12"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-12"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-16"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-16"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-16"><span class="toc-text">失败</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-13"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-13"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-17"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-17"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-17"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E4%B8%AA%E4%BA%BA%E8%AE%BE%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-text">2. 更新用户个人设置信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-14"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-14"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-18"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-18"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-18"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E5%85%B3%E6%B3%A8%E5%88%97%E8%A1%A8"><span class="toc-text">1. 获取用户关注列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-15"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-15"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-19"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-19"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-19"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%85%B3%E6%B3%A8"><span class="toc-text">2. 添加用户关注</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-16"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0-4"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-20"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-20"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-20"><span class="toc-text">失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8F%96%E6%B6%88%E7%94%A8%E6%88%B7%E5%85%B3%E6%B3%A8"><span class="toc-text">3. 取消用户关注</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95-17"><span class="toc-text">请求方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0-16"><span class="toc-text">请求参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94-21"><span class="toc-text">响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%8A%9F-21"><span class="toc-text">成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5-21"><span class="toc-text">失败</span></a></li></ol></li></ol></li></ol></div></div></div>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-09-13T12:29:54.118Z">2023-09-13</time></div></div>
+
+<article class='content md post'>
+
+<h2 id="用户管理接口"><a href="#用户管理接口" class="headerlink" title="用户管理接口"></a>用户管理接口</h2><h4 id="注册接口"><a href="#注册接口" class="headerlink" title="注册接口"></a>注册接口</h4><p><strong>请求方法</strong>：POST</p>
+<p><strong>URL</strong>：/api/user/register</p>
+<p><strong>参数</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>username</td>
+<td>String</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>邮箱</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>手机号</td>
+</tr>
+<tr>
+<td>verification_code</td>
+<td>String</td>
+<td>验证码短信验证码</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li>成功返回</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">200</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;success&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>失败返回</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">400</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;fail&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="获取短信验证码接口"><a href="#获取短信验证码接口" class="headerlink" title="获取短信验证码接口"></a>获取短信验证码接口</h2><p><strong>请求方法</strong>：get</p>
+<p><strong>URL</strong>：/api/user/sendmsg</p>
+<p><strong>参数</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>phone</td>
+<td>String</td>
+<td>手机号</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li>成功返回</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">200</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;success&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;vcode&quot;</span><span class="punctuation">:</span><span class="string">&quot;615843&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>失败返回</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">400</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;fail&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="登陆接口"><a href="#登陆接口" class="headerlink" title="登陆接口"></a>登陆接口</h4><p><strong>请求方法</strong>：POST</p>
+<p><strong>URL</strong>：/api/user/login</p>
+<p><strong>参数</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>username</td>
+<td>String</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>captcha</td>
+<td>String</td>
+<td>图形验证码</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>:</p>
+<ul>
+<li>成功返回</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">200</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;success&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;token&quot;</span><span class="punctuation">:</span><span class="string">&quot;adfadsfadsfadsf.asdfasdfasdfa.asdfasdf&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>失败返回</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span> <span class="number">400</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;fail&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="获取图形验证码"><a href="#获取图形验证码" class="headerlink" title="获取图形验证码"></a>获取图形验证码</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/captcha</p>
+<p><strong>请求参数</strong>：无</p>
+<p><strong>响应数据</strong>：（返回图形验证码的图片）</p>
+<h2 id="收藏接口"><a href="#收藏接口" class="headerlink" title="收藏接口"></a>收藏接口</h2><h4 id="添加到收藏夹"><a href="#添加到收藏夹" class="headerlink" title="添加到收藏夹"></a>添加到收藏夹</h4><p><strong>请求方法</strong>：POST</p>
+<p><strong>URL</strong>：/api/bookmarks</p>
+<p><strong>参数</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>Article_id</td>
+<td>String</td>
+<td>文章ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li>成功时返回：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;meg&quot;: &quot;success！&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>失败时返回：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;meg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="从收藏夹中移除博客"><a href="#从收藏夹中移除博客" class="headerlink" title="从收藏夹中移除博客"></a>从收藏夹中移除博客</h4><p><strong>请求方法</strong>：DELETE</p>
+<p><strong>请求路径</strong>：/api/bookmarks</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>Article_id</td>
+<td>String</td>
+<td>文章ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li>成功时返回：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;meg&quot;: &quot;success！&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>失败时返回：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;meg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取用户的收藏夹列表"><a href="#获取用户的收藏夹列表" class="headerlink" title="获取用户的收藏夹列表"></a>获取用户的收藏夹列表</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/bookmarks</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success！&quot;,</span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;blog_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;blog_title&quot;: &quot;博客标题&quot;,</span><br><span class="line">      &quot;blog_author&quot;: &quot;作者&quot;,</span><br><span class="line">      &quot;blog_date&quot;: &quot;发布日期&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;blog_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;blog_title&quot;: &quot;博客标题&quot;,</span><br><span class="line">      &quot;blog_author&quot;: &quot;作者&quot;,</span><br><span class="line">      &quot;blog_date&quot;: &quot;发布日期&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="评论接口"><a href="#评论接口" class="headerlink" title="评论接口"></a>评论接口</h2><h4 id="获取博客评论列表"><a href="#获取博客评论列表" class="headerlink" title="获取博客评论列表"></a>获取博客评论列表</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/comments</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>article_id</td>
+<td>String</td>
+<td>博客ID</td>
+</tr>
+</tbody></table>
+<p>响应数据：</p>
+<ul>
+<li><p>成功时返回：wc</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;comment_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;username&quot;: &quot;评论者用户名&quot;,</span><br><span class="line">      &quot;comment_content&quot;: &quot;评论内容&quot;,</span><br><span class="line">      &quot;comment_date&quot;: &quot;评论日期&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;comment_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;username&quot;: &quot;评论者用户名&quot;,</span><br><span class="line">      &quot;comment_content&quot;: &quot;评论内容&quot;,</span><br><span class="line">      &quot;comment_date&quot;: &quot;评论日期&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="发布博客评论"><a href="#发布博客评论" class="headerlink" title="发布博客评论"></a>发布博客评论</h4><p><strong>请求方法</strong>：POST</p>
+<p><strong>请求路径</strong>：/api/comments</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>article_id</td>
+<td>String</td>
+<td>博客ID</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户 ID</td>
+</tr>
+<tr>
+<td>comment_content</td>
+<td>String</td>
+<td>评论内容</td>
+</tr>
+</tbody></table>
+<p>响应数据：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;comment_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;username&quot;: &quot;评论者用户名&quot;,</span><br><span class="line">    &quot;comment_content&quot;: &quot;评论内容&quot;,</span><br><span class="line">    &quot;comment_date&quot;: &quot;评论日期&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除博客评论"><a href="#删除博客评论" class="headerlink" title="删除博客评论"></a>删除博客评论</h4><p><strong>请求方法</strong>：DELETE</p>
+<p><strong>请求路径</strong>：/api/comments</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>comment_id</td>
+<td>String</td>
+<td>评论 ID</td>
+</tr>
+</tbody></table>
+<p>响应数据：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="私信"><a href="#私信" class="headerlink" title="私信"></a>私信</h2><h4 id="发送私信"><a href="#发送私信" class="headerlink" title="发送私信"></a>发送私信</h4><p><strong>请求方法</strong>：POST</p>
+<p><strong>请求路径</strong>：/api/msgs</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sender_id</td>
+<td>String</td>
+<td>发送者用户 ID</td>
+</tr>
+<tr>
+<td>receiver_id</td>
+<td>String</td>
+<td>接收者用户 ID</td>
+</tr>
+<tr>
+<td>msg_content</td>
+<td>String</td>
+<td>私信内容</td>
+</tr>
+</tbody></table>
+<p>响应数据：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success！&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;msg_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;sender_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;receiver_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;msg_content&quot;: &quot;私信内容&quot;,</span><br><span class="line">    &quot;msg_date&quot;: &quot;发送日期&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取私信列表"><a href="#获取私信列表" class="headerlink" title="获取私信列表"></a>获取私信列表</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/msgs</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户 ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;sender_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;receiver_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;msg_content&quot;: &quot;私信内容&quot;,</span><br><span class="line">      &quot;msg_date&quot;: &quot;发送日期&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;msg_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;sender_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;receiver_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;msg_content&quot;: &quot;私信内容&quot;,</span><br><span class="line">      &quot;msg_date&quot;: &quot;发送日期&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除私信"><a href="#删除私信" class="headerlink" title="删除私信"></a>删除私信</h4><p><strong>请求方法</strong>：DELETE</p>
+<p><strong>请求路径</strong>：/api/msgs</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>msg_id</td>
+<td>String</td>
+<td>私信 ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><h4 id="搜索博客"><a href="#搜索博客" class="headerlink" title="搜索博客"></a>搜索博客</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/search/blogs</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>keyword</td>
+<td>String</td>
+<td>搜索关键词</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;blog_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;blog_title&quot;: &quot;博客标题&quot;,</span><br><span class="line">      &quot;blog_content&quot;: &quot;博客内容&quot;,</span><br><span class="line">      &quot;blog_date&quot;: &quot;博客发布日期&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;blog_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;blog_title&quot;: &quot;博客标题&quot;,</span><br><span class="line">      &quot;blog_content&quot;: &quot;博客内容&quot;,</span><br><span class="line">      &quot;blog_date&quot;: &quot;博客发布日期&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;搜索博客失败，请稍后重试！&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="搜索用户"><a href="#搜索用户" class="headerlink" title="搜索用户"></a>搜索用户</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/search/users</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>keyword</td>
+<td>String</td>
+<td>搜索关键词</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;username&quot;: &quot;用户名&quot;,</span><br><span class="line">      &quot;email&quot;: &quot;用户邮箱&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;username&quot;: &quot;用户名&quot;,</span><br><span class="line">      &quot;email&quot;: &quot;用户邮箱&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;搜索用户失败，请稍后重试！&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="点赞"><a href="#点赞" class="headerlink" title="点赞"></a>点赞</h2><h4 id="点赞博客"><a href="#点赞博客" class="headerlink" title="点赞博客"></a>点赞博客</h4><p><strong>请求方法</strong>：POST</p>
+<p><strong>请求路径</strong>：/api/likes/blogs</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户 ID</td>
+</tr>
+<tr>
+<td>article_id</td>
+<td>String</td>
+<td>博客 ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;blog_id&quot;: &quot;xxxxxxxxxx&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="取消点赞博客"><a href="#取消点赞博客" class="headerlink" title="取消点赞博客"></a>取消点赞博客</h4><p><strong>请求方法</strong>：DELETE</p>
+<p><strong>请求路径</strong>：/api/likes/blogs</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户 ID</td>
+</tr>
+<tr>
+<td>article_id</td>
+<td>String</td>
+<td>博客ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;blog_id&quot;: &quot;xxxxxxxxxx&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取博客点赞列表"><a href="#获取博客点赞列表" class="headerlink" title="获取博客点赞列表"></a>获取博客点赞列表</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/likes/blogs</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>arcticle_id</td>
+<td>String</td>
+<td>博客 ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;username&quot;: &quot;用户名&quot;,</span><br><span class="line">      &quot;email&quot;: &quot;用户邮箱&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;username&quot;: &quot;用户名&quot;,</span><br><span class="line">      &quot;email&quot;: &quot;用户邮箱&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="文章推送接口"><a href="#文章推送接口" class="headerlink" title="文章推送接口"></a>文章推送接口</h2><h4 id="获取所有文章"><a href="#获取所有文章" class="headerlink" title="获取所有文章"></a>获取所有文章</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/articles</p>
+<p><strong>请求参数</strong>：无</p>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;article_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;title&quot;: &quot;文章标题&quot;,</span><br><span class="line">      &quot;content&quot;: &quot;文章内容&quot;,</span><br><span class="line">      &quot;author&quot;: &quot;作者&quot;,</span><br><span class="line">      &quot;created_at&quot;: &quot;创建时间&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;article_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;title&quot;: &quot;文章标题&quot;,</span><br><span class="line">      &quot;content&quot;: &quot;文章内容&quot;,</span><br><span class="line">      &quot;author&quot;: &quot;作者&quot;,</span><br><span class="line">      &quot;created_at&quot;: &quot;创建时间&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取单篇文章"><a href="#获取单篇文章" class="headerlink" title="获取单篇文章"></a>获取单篇文章</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/articles/{article_id}</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>article_id</td>
+<td>String</td>
+<td>文章 ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;article_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;title&quot;: &quot;文章标题&quot;,</span><br><span class="line">    &quot;content&quot;: &quot;文章内容&quot;,</span><br><span class="line">    &quot;author&quot;: &quot;作者&quot;,</span><br><span class="line">    &quot;created_at&quot;: &quot;创建时间&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取用户的所有文章"><a href="#获取用户的所有文章" class="headerlink" title="获取用户的所有文章"></a>获取用户的所有文章</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/articles/users/{user_id}</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户 ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;article_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;title&quot;: &quot;文章标题&quot;,</span><br><span class="line">      &quot;content&quot;: &quot;文章内容&quot;,</span><br><span class="line">      &quot;author&quot;: &quot;作者&quot;,</span><br><span class="line">      &quot;created_at&quot;: &quot;创建时间&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;article_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;title&quot;: &quot;文章标题&quot;,</span><br><span class="line">      &quot;content&quot;: &quot;文章内容&quot;,</span><br><span class="line">      &quot;author&quot;: &quot;作者&quot;,</span><br><span class="line">      &quot;created_at&quot;: &quot;创建时间&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h4 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h4><p><strong>请求方法</strong>：POST</p>
+<p><strong>请求路径</strong>：/api/users</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>username</td>
+<td>String</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>邮箱</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;status&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;username&quot;: &quot;用户名&quot;,</span><br><span class="line">    &quot;email&quot;: &quot;用户邮箱&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取用户列表"><a href="#获取用户列表" class="headerlink" title="获取用户列表"></a>获取用户列表</h4><p><strong>请求方法</strong>：GET</p>
+<p><strong>请求路径</strong>：/api/users</p>
+<p><strong>请求参数</strong>：无</p>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;data&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;username&quot;: &quot;用户名&quot;,</span><br><span class="line">      &quot;email&quot;: &quot;用户邮箱&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">      &quot;username&quot;: &quot;用户名&quot;,</span><br><span class="line">      &quot;email&quot;: &quot;用户邮箱&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="更新用户信息"><a href="#更新用户信息" class="headerlink" title="更新用户信息"></a>更新用户信息</h4><p><strong>请求方法</strong>：PUT</p>
+<p><strong>请求路径</strong>：/api/users/{user_id}</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>username</td>
+<td>String</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>password</td>
+<td>String</td>
+<td>密码</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>邮箱</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;user_id&quot;: &quot;xxxxxxxxxx&quot;,</span><br><span class="line">    &quot;username&quot;: &quot;新的用户名&quot;,</span><br><span class="line">    &quot;email&quot;: &quot;新的用户邮箱&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h4><p><strong>请求方法</strong>：DELETE</p>
+<p><strong>请求路径</strong>：/api/users/{user_id}</p>
+<p><strong>请求参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>String</td>
+<td>用户ID</td>
+</tr>
+</tbody></table>
+<p><strong>响应数据</strong>：</p>
+<ul>
+<li><p>成功时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;200&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>失败时返回：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;: &quot;400&quot;,</span><br><span class="line">  &quot;msg&quot;: &quot;fail&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="分析接口"><a href="#分析接口" class="headerlink" title="分析接口"></a>分析接口</h2><h1 id="获取分享链接"><a href="#获取分享链接" class="headerlink" title="获取分享链接"></a>获取分享链接</h1><h3 id="请求方法：get"><a href="#请求方法：get" class="headerlink" title="请求方法：get"></a>请求方法：get</h3><h3 id="请求路径"><a href="#请求路径" class="headerlink" title="请求路径:"></a>请求路径:</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET : /api/share/link</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>article_id</td>
+<td>string</td>
+<td>文章ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3><h4 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">    &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;share_link&quot;: &quot;https://example.com/share/abcd1234&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败"><a href="#失败" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;code&quot;:400</span><br><span class="line">  &quot;status&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;文章不存在&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-获取分享统计数据"><a href="#2-获取分享统计数据" class="headerlink" title="2. 获取分享统计数据"></a>2. 获取分享统计数据</h2><h3 id="请求方法："><a href="#请求方法：" class="headerlink" title="请求方法："></a>请求方法：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/share/analytics</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>article_id</td>
+<td>string</td>
+<td>文章的唯一标识</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>开始日期</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>结束日期</td>
+</tr>
+</tbody></table>
+<h3 id="响应-1"><a href="#响应-1" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-1"><a href="#成功-1" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">jsonCopy Code&#123;</span><br><span class="line">  &quot;status&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;shares&quot;: 100,</span><br><span class="line">    &quot;clicks&quot;: 200</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-1"><a href="#失败-1" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jsonCopy Code&#123;</span><br><span class="line">  &quot;status&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取统计数据&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>举报</strong></em></p>
+<h2 id="1-创建举报信息"><a href="#1-创建举报信息" class="headerlink" title="1. 创建举报信息"></a>1. 创建举报信息</h2><h3 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /api/report</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数"><a href="#请求参数" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>object_type</td>
+<td>string</td>
+<td>举报对象类型</td>
+</tr>
+<tr>
+<td>object_id</td>
+<td>string</td>
+<td>被举报用户的ID</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>string</td>
+<td>举报原因</td>
+</tr>
+<tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户的ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应-2"><a href="#响应-2" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-2"><a href="#成功-2" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;report_id&quot;: &quot;123456789&quot;,</span><br><span class="line">    &quot;message&quot;: &quot;举报信息已提交&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-2"><a href="#失败-2" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法创建举报信息&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-处理举报信息"><a href="#2-处理举报信息" class="headerlink" title="2. 处理举报信息"></a>2. 处理举报信息</h2><h3 id="请求方法-1"><a href="#请求方法-1" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT /api/report/&#123;report_id&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-1"><a href="#请求参数-1" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>report_id</td>
+<td>string</td>
+<td>举报信息的唯一标识</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>处理状态</td>
+</tr>
+<tr>
+<td>handled_by</td>
+<td>string</td>
+<td>处理人员的唯一标识</td>
+</tr>
+</tbody></table>
+<h3 id="响应-3"><a href="#响应-3" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-3"><a href="#成功-3" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;message&quot;: &quot;举报信息已处理&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-3"><a href="#失败-3" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;status&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法处理举报信息&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-获取举报信息详情"><a href="#3-获取举报信息详情" class="headerlink" title="3. 获取举报信息详情"></a>3. 获取举报信息详情</h2><h3 id="请求方法-2"><a href="#请求方法-2" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/report/&#123;report_id&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-2"><a href="#请求参数-2" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>report_id</td>
+<td>string</td>
+<td>举报信息的唯一标识</td>
+</tr>
+</tbody></table>
+<h3 id="响应-4"><a href="#响应-4" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-4"><a href="#成功-4" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;object_type&quot;: &quot;article&quot;,</span><br><span class="line">    &quot;object_id&quot;: &quot;abcdef1234&quot;,</span><br><span class="line">    &quot;reason&quot;: &quot;垃圾广告&quot;,</span><br><span class="line">    &quot;status&quot;: &quot;handled&quot;,</span><br><span class="line">    &quot;handled_by&quot;: &quot;admin&quot;,</span><br><span class="line">    &quot;handled_at&quot;: &quot;2023-07-24 10:00:00&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-4"><a href="#失败-4" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;status&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取举报信息&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>通知</strong></em></p>
+<h2 id="1-创建通知"><a href="#1-创建通知" class="headerlink" title="1. 创建通知"></a>1. 创建通知</h2><h3 id="请求方法-3"><a href="#请求方法-3" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /api/notification</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-3"><a href="#请求参数-3" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>通知内容</td>
+</tr>
+</tbody></table>
+<h3 id="响应-5"><a href="#响应-5" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-5"><a href="#成功-5" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;notification_id&quot;: &quot;123456789&quot;,</span><br><span class="line">    &quot;message&quot;: &quot;通知已发送&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-5"><a href="#失败-5" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;status&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法创建通知&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-获取通知列表"><a href="#2-获取通知列表" class="headerlink" title="2. 获取通知列表"></a>2. 获取通知列表</h2><h3 id="请求方法-4"><a href="#请求方法-4" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/notification</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-4"><a href="#请求参数-4" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>start_date</td>
+<td>string</td>
+<td>开始日期</td>
+</tr>
+<tr>
+<td>end_date</td>
+<td>string</td>
+<td>结束日期</td>
+</tr>
+</tbody></table>
+<h3 id="响应-6"><a href="#响应-6" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-6"><a href="#成功-6" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;notifications&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;notification_id&quot;: &quot;123&quot;,</span><br><span class="line">        &quot;message&quot;: &quot;您的文章已通过审核&quot;,</span><br><span class="line">        &quot;link&quot;: &quot;https://example.com/article/123&quot;,</span><br><span class="line">        &quot;importance&quot;: &quot;high&quot;,</span><br><span class="line">        &quot;created_at&quot;: &quot;2023-07-24 10:00:00&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;notification_id&quot;: &quot;456&quot;,</span><br><span class="line">        &quot;message&quot;: &quot;请更新您的个人资料&quot;,</span><br><span class="line">        &quot;link&quot;: &quot;https://example.com/profile&quot;,</span><br><span class="line">        &quot;importance&quot;: &quot;medium&quot;,</span><br><span class="line">        &quot;created_at&quot;: &quot;2023-07-23 09:30:00&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-6"><a href="#失败-6" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取通知列表&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-标记通知为已读"><a href="#3-标记通知为已读" class="headerlink" title="3. 标记通知为已读"></a>3. 标记通知为已读</h2><h3 id="请求方法-5"><a href="#请求方法-5" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT /api/notification/&#123;notification_id&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-5"><a href="#请求参数-5" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>notification_id</td>
+<td>string</td>
+<td>信息ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应-7"><a href="#响应-7" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-7"><a href="#成功-7" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;message&quot;: &quot;通知已标记为已读&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-7"><a href="#失败-7" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法标记通知为已读&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><em><strong>分析</strong></em></p>
+<h2 id="1-获取文章统计信息"><a href="#1-获取文章统计信息" class="headerlink" title="1. 获取文章统计信息"></a>1. 获取文章统计信息</h2><h3 id="请求方法-6"><a href="#请求方法-6" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/article/&#123;article_id&#125;/analytics</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-6"><a href="#请求参数-6" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>article_id</td>
+<td>string</td>
+<td>文章ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应-8"><a href="#响应-8" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-8"><a href="#成功-8" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;views&quot;: 1000,</span><br><span class="line">    &quot;likes&quot;: 500,</span><br><span class="line">    &quot;comments&quot;: 200</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-8"><a href="#失败-8" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取文章统计信息&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-获取热门文章列表"><a href="#2-获取热门文章列表" class="headerlink" title="2. 获取热门文章列表"></a>2. 获取热门文章列表</h2><h3 id="请求方法-7"><a href="#请求方法-7" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/articles/popular</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-7"><a href="#请求参数-7" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>limit</td>
+<td>int</td>
+<td>获取文章数量</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>文章分类（可选）</td>
+</tr>
+</tbody></table>
+<h3 id="响应-9"><a href="#响应-9" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-9"><a href="#成功-9" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;articles&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;article_id&quot;: &quot;123&quot;,</span><br><span class="line">        &quot;title&quot;: &quot;如何成为优秀的程序员&quot;,</span><br><span class="line">        &quot;author&quot;: &quot;John Doe&quot;,</span><br><span class="line">        &quot;views&quot;: 1000,</span><br><span class="line">        &quot;likes&quot;: 500,</span><br><span class="line">        &quot;comments&quot;: 200</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;article_id&quot;: &quot;456&quot;,</span><br><span class="line">        &quot;title&quot;: &quot;学习新技术的方法&quot;,</span><br><span class="line">        &quot;author&quot;: &quot;Jane Smith&quot;,</span><br><span class="line">        &quot;views&quot;: 800,</span><br><span class="line">        &quot;likes&quot;: 400,</span><br><span class="line">        &quot;comments&quot;: 150</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-9"><a href="#失败-9" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取热门文章列表&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-获取作者文章统计信息"><a href="#3-获取作者文章统计信息" class="headerlink" title="3. 获取作者文章统计信息"></a>3. 获取作者文章统计信息</h2><h3 id="请求方法-8"><a href="#请求方法-8" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/author/&#123;author_id&#125;/analytics</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-8"><a href="#请求参数-8" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>author_id</td>
+<td>string</td>
+<td>作者的唯一标识</td>
+</tr>
+</tbody></table>
+<h3 id="响应-10"><a href="#响应-10" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-10"><a href="#成功-10" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;total_articles&quot;: 50,</span><br><span class="line">    &quot;total_views&quot;: 10000,</span><br><span class="line">    &quot;total_likes&quot;: 5000,</span><br><span class="line">    &quot;total_comments&quot;: 2000</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-10"><a href="#失败-10" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取作者文章统计信息&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>个人主页</strong></em></p>
+<h2 id="1-获取用户信息"><a href="#1-获取用户信息" class="headerlink" title="1. 获取用户信息"></a>1. 获取用户信息</h2><h3 id="请求方法-9"><a href="#请求方法-9" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/user/&#123;user_id&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-9"><a href="#请求参数-9" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应-11"><a href="#响应-11" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-11"><a href="#成功-11" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;user_id&quot;: &quot;123456&quot;,</span><br><span class="line">    &quot;username&quot;: &quot;john_doe&quot;,</span><br><span class="line">    &quot;full_name&quot;: &quot;John Doe&quot;,</span><br><span class="line">    &quot;email&quot;: &quot;johndoe@example.com&quot;,</span><br><span class="line">    &quot;avatar_url&quot;: &quot;https://example.com/avatar.jpg&quot;,</span><br><span class="line">    &quot;bio&quot;: &quot;Hello, I&#x27;m John Doe! Nice to meet you.&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-11"><a href="#失败-11" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取用户信息&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-更新用户信息"><a href="#2-更新用户信息" class="headerlink" title="2. 更新用户信息"></a>2. 更新用户信息</h2><h3 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT /api/user/&#123;user_id&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数-2"><a href="#参数-2" class="headerlink" title="参数"></a>参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>full_name</td>
+<td>string</td>
+<td>用户全名</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>邮箱地址</td>
+</tr>
+<tr>
+<td>avatar_url</td>
+<td>string</td>
+<td>头像图片地址</td>
+</tr>
+<tr>
+<td>bio</td>
+<td>string</td>
+<td>用户个人简介</td>
+</tr>
+</tbody></table>
+<h3 id="响应-12"><a href="#响应-12" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-12"><a href="#成功-12" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;status&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;message&quot;: &quot;用户信息已更新&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-12"><a href="#失败-12" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法更新用户信息&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-获取用户文章列表"><a href="#3-获取用户文章列表" class="headerlink" title="3. 获取用户文章列表"></a>3. 获取用户文章列表</h2><h3 id="请求-1"><a href="#请求-1" class="headerlink" title="请求"></a>请求</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/user/&#123;user_id&#125;/articles</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数-3"><a href="#参数-3" class="headerlink" title="参数"></a>参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>int</td>
+<td>获取文章数量</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>文章分类（可选）</td>
+</tr>
+</tbody></table>
+<h3 id="响应-13"><a href="#响应-13" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-13"><a href="#成功-13" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;articles&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;article_id&quot;: &quot;123&quot;,</span><br><span class="line">        &quot;title&quot;: &quot;如何成为优秀的程序员&quot;,</span><br><span class="line">        &quot;category&quot;: &quot;技术&quot;,</span><br><span class="line">        &quot;created_at&quot;: &quot;2023-07-23 10:00:00&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;article_id&quot;: &quot;456&quot;,</span><br><span class="line">        &quot;title&quot;: &quot;学习新技术的方法&quot;,</span><br><span class="line">        &quot;category&quot;: &quot;技术&quot;,</span><br><span class="line">        &quot;created_at&quot;: &quot;2023-07-22 09:30:00&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-13"><a href="#失败-13" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取用户文章列表&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>历史记录</strong></em></p>
+<h2 id="1-获取用户历史记录列表"><a href="#1-获取用户历史记录列表" class="headerlink" title="1. 获取用户历史记录列表"></a>1. 获取用户历史记录列表</h2><h3 id="请求方法-10"><a href="#请求方法-10" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/user/&#123;user_id&#125;/history</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-10"><a href="#请求参数-10" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>int</td>
+<td>获取记录数量</td>
+</tr>
+</tbody></table>
+<h3 id="响应-14"><a href="#响应-14" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-14"><a href="#成功-14" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;history&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;article_id&quot;: &quot;123&quot;,</span><br><span class="line">        &quot;title&quot;: &quot;如何成为优秀的程序员&quot;,</span><br><span class="line">        &quot;category&quot;: &quot;技术&quot;,</span><br><span class="line">        &quot;visited_at&quot;: &quot;2023-07-23 10:00:00&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;article_id&quot;: &quot;456&quot;,</span><br><span class="line">        &quot;title&quot;: &quot;学习新技术的方法&quot;,</span><br><span class="line">        &quot;category&quot;: &quot;技术&quot;,</span><br><span class="line">        &quot;visited_at&quot;: &quot;2023-07-22 09:30:00&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-14"><a href="#失败-14" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取用户历史记录&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-添加历史记录"><a href="#2-添加历史记录" class="headerlink" title="2. 添加历史记录"></a>2. 添加历史记录</h2><h3 id="请求方法-11"><a href="#请求方法-11" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /api/user/&#123;user_id&#125;/history</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-11"><a href="#请求参数-11" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>article_id</td>
+<td>string</td>
+<td>文章ID</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>文章标题</td>
+</tr>
+<tr>
+<td>category</td>
+<td>string</td>
+<td>文章分类</td>
+</tr>
+</tbody></table>
+<h3 id="响应-15"><a href="#响应-15" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-15"><a href="#成功-15" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;message&quot;: &quot;历史记录已添加&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-15"><a href="#失败-15" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法添加历史记录&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-清空历史记录"><a href="#3-清空历史记录" class="headerlink" title="3. 清空历史记录"></a>3. 清空历史记录</h2><h3 id="请求方法-12"><a href="#请求方法-12" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /api/user/&#123;user_id&#125;/history</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-12"><a href="#请求参数-12" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应-16"><a href="#响应-16" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-16"><a href="#成功-16" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;message&quot;: &quot;历史记录已清空&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-16"><a href="#失败-16" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法清空历史记录&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<p><em><strong>个人设置</strong></em></p>
+<p>​    1. 获取用户个人设置信息</p>
+<h3 id="请求方法-13"><a href="#请求方法-13" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/user/&#123;user_id&#125;/settings</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-13"><a href="#请求参数-13" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应-17"><a href="#响应-17" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-17"><a href="#成功-17" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;user_id&quot;: &quot;123456&quot;,</span><br><span class="line">    &quot;username&quot;: &quot;john_doe&quot;,</span><br><span class="line">    &quot;email&quot;: &quot;johndoe@example.com&quot;,</span><br><span class="line">    &quot;notification&quot;: &#123;</span><br><span class="line">      &quot;enable_email&quot;: true,</span><br><span class="line">      &quot;enable_push&quot;: false</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;privacy&quot;: &#123;</span><br><span class="line">      &quot;public_profile&quot;: false,</span><br><span class="line">      &quot;show_email&quot;: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-17"><a href="#失败-17" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取用户个人设置信息&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-更新用户个人设置信息"><a href="#2-更新用户个人设置信息" class="headerlink" title="2. 更新用户个人设置信息"></a>2. 更新用户个人设置信息</h2><h3 id="请求方法-14"><a href="#请求方法-14" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUT /api/user/&#123;user_id&#125;/settings</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-14"><a href="#请求参数-14" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>用户名</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>邮箱地址</td>
+</tr>
+<tr>
+<td>notification</td>
+<td>object</td>
+<td>通知设置</td>
+</tr>
+<tr>
+<td>notification.enable_email</td>
+<td>bool</td>
+<td>启用邮件通知</td>
+</tr>
+<tr>
+<td>notification.enable_push</td>
+<td>bool</td>
+<td>启用推送通知</td>
+</tr>
+<tr>
+<td>privacy</td>
+<td>object</td>
+<td>隐私设置</td>
+</tr>
+<tr>
+<td>privacy.public_profile</td>
+<td>bool</td>
+<td>公开个人资料</td>
+</tr>
+<tr>
+<td>privacy.show_email</td>
+<td>bool</td>
+<td>显示邮箱地址</td>
+</tr>
+</tbody></table>
+<h3 id="响应-18"><a href="#响应-18" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-18"><a href="#成功-18" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;message&quot;: &quot;用户个人设置已更新&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-18"><a href="#失败-18" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法更新用户个人设置信息&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><strong>关注</strong></em></p>
+<h2 id="1-获取用户关注列表"><a href="#1-获取用户关注列表" class="headerlink" title="1. 获取用户关注列表"></a>1. 获取用户关注列表</h2><h3 id="请求方法-15"><a href="#请求方法-15" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /api/user/&#123;user_id&#125;/following</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-15"><a href="#请求参数-15" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应-19"><a href="#响应-19" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-19"><a href="#成功-19" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;	</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;user_id&quot;: &quot;123456&quot;,</span><br><span class="line">    &quot;following&quot;: [</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;user_id&quot;: &quot;7890&quot;,</span><br><span class="line">        &quot;username&quot;: &quot;jane_doe&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        &quot;user_id&quot;: &quot;0987&quot;,</span><br><span class="line">        &quot;username&quot;: &quot;john_smith&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-19"><a href="#失败-19" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法获取用户关注列表&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-添加用户关注"><a href="#2-添加用户关注" class="headerlink" title="2. 添加用户关注"></a>2. 添加用户关注</h2><h3 id="请求方法-16"><a href="#请求方法-16" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST /api/user/&#123;user_id&#125;/following</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数-4"><a href="#参数-4" class="headerlink" title="参数"></a>参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>following_id</td>
+<td>string</td>
+<td>要关注用户的ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应-20"><a href="#响应-20" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-20"><a href="#成功-20" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;message&quot;: &quot;用户关注成功&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-20"><a href="#失败-20" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法添加用户关注&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-取消用户关注"><a href="#3-取消用户关注" class="headerlink" title="3. 取消用户关注"></a>3. 取消用户关注</h2><h3 id="请求方法-17"><a href="#请求方法-17" class="headerlink" title="请求方法"></a>请求方法</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DELETE /api/user/&#123;user_id&#125;/following/&#123;following_id&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="请求参数-16"><a href="#请求参数-16" class="headerlink" title="请求参数"></a>请求参数</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>string</td>
+<td>用户ID</td>
+</tr>
+<tr>
+<td>following_id</td>
+<td>string</td>
+<td>要取消关注用户ID</td>
+</tr>
+</tbody></table>
+<h3 id="响应-21"><a href="#响应-21" class="headerlink" title="响应"></a>响应</h3><h4 id="成功-21"><a href="#成功-21" class="headerlink" title="成功"></a>成功</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:200</span><br><span class="line">  &quot;msg&quot;: &quot;success&quot;,</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;message&quot;: &quot;用户取消关注成功&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="失败-21"><a href="#失败-21" class="headerlink" title="失败"></a>失败</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;code&quot;:400</span><br><span class="line">  &quot;msg&quot;: &quot;error&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;无法取消用户关注&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/09/13/%E8%AE%A4%E8%AF%86fcpx%E9%9D%A2%E6%9D%BF/">undefined</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/09/13/java-redies/">undefined</a></div></section></div>
+
+
+
+
+
+
+  <div class='related-wrap md reveal' id="comments">
+    <div class='cmt-title cap theme'>
+      快来参与讨论吧
+    </div>
+    <div class='cmt-body waline'>
+      
+
+<div id="waline_container" class="waline_thread"><svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+
+    </div>
+  </div>
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.13.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.13.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function load_comment(){
+    if(!document.getElementById("waline_container"))return;
+    stellar.loadCSS('https://unpkg.com/@waline/client@v2/dist/waline.css');
+    stellar.loadScript('https://unpkg.com/@waline/client@v2/dist/waline.js', {defer:true}).then(function () {
+      const el = document.getElementById("waline_container");
+      var path = el.getAttribute('comment_id');
+      if (!path) {
+        path = decodeURI(window.location.pathname);
+      }
+      Waline.init(Object.assign({"js":"https://unpkg.com/@waline/client@v2/dist/waline.js","css":"https://unpkg.com/@waline/client@v2/dist/waline.css","serverURL":"https://comments.alan.org.cn","commentCount":true,"pageview":false,"emoji":["https://gcore.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs","https://unpkg.com/@waline/emojis@1.1.0/weibo","https://unpkg.com/@waline/emojis@1.1.0/alus","https://unpkg.com/@waline/emojis@1.1.0/bilibili","https://unpkg.com/@waline/emojis@1.1.0/qq","https://unpkg.com/@waline/emojis@1.1.0/tieba","https://unpkg.com/@waline/emojis@1.1.0/tw-emoji","https://unpkg.com/@waline/emojis@1.1.0/bmoji"],"meta":["nick","mail","link"],"requiredMeta":["nick","mail"],"lang":"zh-CN","login":"force","pageSize":10}, {
+        el: '#waline_container',
+        path: path,
+      }));
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+    load_comment();
+  });
+
+</script>
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

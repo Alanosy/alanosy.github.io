@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.2">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.13.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Alan</title>
+
+  
+    <meta name="description" content="认识fcpx面板 边栏 素材、编辑决定、原数据、媒体整理、分角色、关键词设定、粗剪   检视器 播放浏览器和时间线中视频   检查器 音视频参数调整，调色，信息检查   磁性时间线 右边，效果，和专场，精简和包装在这    边栏 资源库边栏 照片和音频边栏 字幕和发生器边栏  资源库一个资源库包含多个事件 一个事件包含多个项目 工程文件、录屏素材、文案、应约、final缓存、Out 事件包含：原素">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alan">
+<meta property="og:url" content="https://www.alan.org.cn/2023/09/13/%E8%AE%A4%E8%AF%86fcpx%E9%9D%A2%E6%9D%BF/index.html">
+<meta property="og:site_name" content="Alan">
+<meta property="og:description" content="认识fcpx面板 边栏 素材、编辑决定、原数据、媒体整理、分角色、关键词设定、粗剪   检视器 播放浏览器和时间线中视频   检查器 音视频参数调整，调色，信息检查   磁性时间线 右边，效果，和专场，精简和包装在这    边栏 资源库边栏 照片和音频边栏 字幕和发生器边栏  资源库一个资源库包含多个事件 一个事件包含多个项目 工程文件、录屏素材、文案、应约、final缓存、Out 事件包含：原素">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-13T12:29:54.119Z">
+<meta property="article:modified_time" content="2023-09-13T12:29:54.119Z">
+<meta property="article:author" content="Alan">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://blog-alan.oss-cn-hangzhou.aliyuncs.com/head/heads.png">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header">
+
+<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://blog-alan.oss-cn-hangzhou.aliyuncs.com/head/heads.png" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Alan</div></a></div>
+
+
+<nav class="menu dis-select"><a class="nav-item" href="/index/">首页</a><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">项目</a></nav>
+</header>
+
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">本文目录</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86fcpx%E9%9D%A2%E6%9D%BF"><span class="toc-text">认识fcpx面板</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%B9%E6%A0%8F"><span class="toc-text">边栏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E5%BA%93"><span class="toc-text">资源库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-text">新建项目</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E5%AA%92%E4%BD%93%E5%8F%8A%E7%B4%A0%E6%9D%90%E7%AE%A1%E7%90%86"><span class="toc-text">导入媒体及素材管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E8%AF%8D-%E7%89%87%E6%AE%B5%E8%BF%87%E6%BB%A4-%E5%88%86%E8%A7%92%E8%89%B2"><span class="toc-text">关键词 片段过滤 分角色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%97%E5%89%AA"><span class="toc-text">粗剪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E8%A7%92%E8%89%B2"><span class="toc-text">分角色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%82%B9%E5%89%AA%E8%BE%91%E5%A4%A7%E6%B3%95"><span class="toc-text">三点剪辑大法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E7%BA%BF"><span class="toc-text">时间线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#P%E5%92%8CR"><span class="toc-text">P和R</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E7%BA%BF-1"><span class="toc-text">时间线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7"><span class="toc-text">工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E5%B9%95"><span class="toc-text">字幕</span></a></li></ol></div></div></div>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-09-13T12:29:54.119Z">2023-09-13</time></div></div>
+
+<article class='content md post'>
+
+<h2 id="认识fcpx面板"><a href="#认识fcpx面板" class="headerlink" title="认识fcpx面板"></a>认识fcpx面板</h2><ul>
+<li>边栏<ul>
+<li>素材、编辑决定、原数据、媒体整理、分角色、关键词设定、粗剪</li>
+</ul>
+</li>
+<li>检视器<ul>
+<li>播放浏览器和时间线中视频</li>
+</ul>
+</li>
+<li>检查器<ul>
+<li>音视频参数调整，调色，信息检查</li>
+</ul>
+</li>
+<li>磁性时间线<ul>
+<li>右边，效果，和专场，精简和包装在这</li>
+</ul>
+</li>
+</ul>
+<h4 id="边栏"><a href="#边栏" class="headerlink" title="边栏"></a>边栏</h4><ul>
+<li>资源库边栏</li>
+<li>照片和音频边栏</li>
+<li>字幕和发生器边栏</li>
+</ul>
+<h4 id="资源库"><a href="#资源库" class="headerlink" title="资源库"></a>资源库</h4><p>一个资源库包含多个事件</p>
+<p>一个事件包含多个项目</p>
+<p>工程文件、录屏素材、文案、应约、final缓存、Out</p>
+<p>事件包含：原素材及项目的文件夹、包括导入的视频、图片、音频</p>
+<p>新建媒体、缓存、备份三个文件夹</p>
+<h4 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h4><p>确定名称</p>
+<p>确定视频格式</p>
+<p>解码器Apple PreRes 422</p>
+<p>音频默认</p>
+<h2 id="导入媒体及素材管理"><a href="#导入媒体及素材管理" class="headerlink" title="导入媒体及素材管理"></a>导入媒体及素材管理</h2><p>![截屏2023-08-28 下午3.22.45](/Users/alan/Library/Application Support/typora-user-images/截屏2023-08-28 下午3.22.45.png)</p>
+<p>Command+i</p>
+<p>选择要导入的素材</p>
+<p>在右上角的事件中根据不同的属性新建事件，一个事件对应一种素材类型</p>
+<p>转码勾选：创建优化的媒体</p>
+<p>分析与修正：对视频进行颜色平衡分析、将单声道隔开对立体声音进行分组、移除静音通道</p>
+<p>一定要养成事件归类意识</p>
+<h2 id="关键词-片段过滤-分角色"><a href="#关键词-片段过滤-分角色" class="headerlink" title="关键词 片段过滤 分角色"></a>关键词 片段过滤 分角色</h2><p>添加关键词</p>
+<p>command+k就可以添加关键字（左上角钥匙）</p>
+<p>上方有蓝色线条的就是有关键词的素材</p>
+<p>点击右上角可以进行片段过滤，选择无评价和关刺激，然后进行 添加关键词</p>
+<p>选中按delete，标记废弃素材。U取消拒绝</p>
+<p>可以把通类关键词放在同一个文件夹</p>
+<h2 id="粗剪"><a href="#粗剪" class="headerlink" title="粗剪"></a>粗剪</h2><p>I开始入点+O出点+F</p>
+<p>J倒放</p>
+<p>K暂停</p>
+<p>L播放</p>
+<p>F个人收藏</p>
+<p>U重做</p>
+<p>I入点</p>
+<p>O出点</p>
+<p>;上一个编辑点</p>
+<p>‘下一个编辑点</p>
+<h2 id="分角色"><a href="#分角色" class="headerlink" title="分角色"></a>分角色</h2><p>右键编辑角色添加角色</p>
+<p>索引可以看到角色</p>
+<h2 id="三点剪辑大法"><a href="#三点剪辑大法" class="headerlink" title="三点剪辑大法"></a>三点剪辑大法</h2><p>打好入点出点，确定长度，再打个编辑点</p>
+<p>连接Q(放到上面，`拖移）、插入W(根据播放头位置）、追加E(尾部）、覆盖D</p>
+<p>M打标记点，根据标记点选择入点和出点I/O来到资源库选择入点用D覆盖，就会根据音乐出入点选择时长，如果节奏没对上可以按T微调</p>
+<h2 id="时间线"><a href="#时间线" class="headerlink" title="时间线"></a>时间线</h2><p>左上方ATPRBZH</p>
+<p>A 选择，拖移会影响时长</p>
+<p>Option shfit+a自动增强音频</p>
+<p>T修建 拖移不会影响时长</p>
+<p>在停留在素材中间时，按住左右拖移可以修改内容，上面会显示时间</p>
+<p>cmd+T会添加默认转场，左上角拖移会改变右边素材点时长，中部拖移会改变剪辑点</p>
+<p>按转场头或尾会改变转场长度</p>
+<p> 如在在视频中部按cmd+t会添加播放头和尾的转场</p>
+<p>ctrl+T 会创建名为标题的默认字幕，然后用检查器修改</p>
+<h2 id="P和R"><a href="#P和R" class="headerlink" title="P和R"></a>P和R</h2><p>P撑拉素材不会改变整体时长，只能缩短单个素材的长度，同时会流出灰色的空隙，可以选择按x，同时新增素材</p>
+<p>推素材会覆盖其他素材且留出空隙</p>
+<p>cmd+P可以输入时间码可以移动播放头的位置</p>
+<p>范围选择R</p>
+<p>鼠标打出入点，就是在某一段范围调设置</p>
+<p>音频指示器，在视频下方，点一下</p>
+<p>整体音量不低于-20db</p>
+<p>不可高于-6</p>
+<p>cmd+r会激活变速</p>
+<p>s+c+R会显示在访达点位置</p>
+<h2 id="时间线-1"><a href="#时间线-1" class="headerlink" title="时间线"></a>时间线</h2><p>B切割</p>
+<p>cmd+B直接切割</p>
+<p>s+c+B切割整条时间线</p>
+<p>o+[/]修改开头或结尾，剪掉播放头左边素材和右边素材</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ol>
+<li>素材有横屏和竖屏，点击检查器，视频检查器，空间符合点填充，调整y轴</li>
+<li>竖版照片，按option同时选中素材往上复制一层，然后将底层素材改为填充，在添加高斯模糊效果</li>
+<li>平衡颜色 也可以点击检查器，并矫正白平衡，点击白色</li>
+<li>选中需要调整的素材，点击匹配颜色option+cmd+M,然后找他调整好颜色的素材，点击应用匹配项</li>
+<li>添加效果直接拖到素材上，右上角检查器可以调整效果，cmd+c，s+c+v粘贴效果</li>
+<li>o+c+上,v停用，</li>
+<li>切换时间线，</li>
+<li>录制画外音，窗口》录制画外音</li>
+<li>声音不够饱满，选中音频，点击自动增强音频，如果想更上一层楼，点击检查器，打开检查器，打开图像均衡器</li>
+<li>响度和降噪</li>
+<li>标记按两下MM</li>
+<li>防抖动</li>
+</ol>
+<h2 id="字幕"><a href="#字幕" class="headerlink" title="字幕"></a>字幕</h2><p>网易见外</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/09/13/%E6%9E%84%E5%9B%BE/">undefined</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/09/13/%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/">undefined</a></div></section></div>
+
+
+
+
+
+
+  <div class='related-wrap md reveal' id="comments">
+    <div class='cmt-title cap theme'>
+      快来参与讨论吧
+    </div>
+    <div class='cmt-body waline'>
+      
+
+<div id="waline_container" class="waline_thread"><svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg></div>
+
+    </div>
+  </div>
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.13.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.13.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function load_comment(){
+    if(!document.getElementById("waline_container"))return;
+    stellar.loadCSS('https://unpkg.com/@waline/client@v2/dist/waline.css');
+    stellar.loadScript('https://unpkg.com/@waline/client@v2/dist/waline.js', {defer:true}).then(function () {
+      const el = document.getElementById("waline_container");
+      var path = el.getAttribute('comment_id');
+      if (!path) {
+        path = decodeURI(window.location.pathname);
+      }
+      Waline.init(Object.assign({"js":"https://unpkg.com/@waline/client@v2/dist/waline.js","css":"https://unpkg.com/@waline/client@v2/dist/waline.css","serverURL":"https://comments.alan.org.cn","commentCount":true,"pageview":false,"emoji":["https://gcore.jsdelivr.net/gh/norevi/waline-blobcatemojis@1.0/blobs","https://unpkg.com/@waline/emojis@1.1.0/weibo","https://unpkg.com/@waline/emojis@1.1.0/alus","https://unpkg.com/@waline/emojis@1.1.0/bilibili","https://unpkg.com/@waline/emojis@1.1.0/qq","https://unpkg.com/@waline/emojis@1.1.0/tieba","https://unpkg.com/@waline/emojis@1.1.0/tw-emoji","https://unpkg.com/@waline/emojis@1.1.0/bmoji"],"meta":["nick","mail","link"],"requiredMeta":["nick","mail"],"lang":"zh-CN","login":"force","pageSize":10}, {
+        el: '#waline_container',
+        path: path,
+      }));
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+    load_comment();
+  });
+
+</script>
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
