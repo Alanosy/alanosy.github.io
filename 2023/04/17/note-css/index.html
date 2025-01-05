@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.2">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.13.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>css笔记 - Alan</title>
+
+  
+    <meta name="description" content="复合选择器 多元素选择器：选择器1,选择器2{属性:值;} 后代元素选择器：E F{属性:值;} 子元素选择器：E &gt; F{属性:值;} 相邻元素选择器：E + F{属性:值;}  ！Important 属性内容介绍 一、什么是 important 二、!important 在 CSS 中的作用 三、语法格式 一、什么是 important important 在英文中含义是“重要的”意思">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css笔记">
+<meta property="og:url" content="https://alan.org.cn/2023/04/17/note-css/index.html">
+<meta property="og:site_name" content="Alan">
+<meta property="og:description" content="复合选择器 多元素选择器：选择器1,选择器2{属性:值;} 后代元素选择器：E F{属性:值;} 子元素选择器：E &gt; F{属性:值;} 相邻元素选择器：E + F{属性:值;}  ！Important 属性内容介绍 一、什么是 important 二、!important 在 CSS 中的作用 三、语法格式 一、什么是 important important 在英文中含义是“重要的”意思">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-17T05:54:00.000Z">
+<meta property="article:modified_time" content="2023-04-21T02:40:26.000Z">
+<meta property="article:author" content="Alan">
+<meta property="article:tag" content="技术分享">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://blog-alan.oss-cn-hangzhou.aliyuncs.com/head/heads.png">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header">
+
+<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://blog-alan.oss-cn-hangzhou.aliyuncs.com/head/heads.png" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Alan</div></a></div>
+
+
+<nav class="menu dis-select"><a class="nav-item" href="/index/">首页</a><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">项目</a></nav>
+</header>
+
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">css笔记</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-text">复合选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%81Important-%E5%B1%9E%E6%80%A7"><span class="toc-text">！Important 属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8%E7%AE%80%E4%BB%8B"><span class="toc-text">浮动简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#display"><span class="toc-text">display</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position"><span class="toc-text">position</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9B%BA%E5%AE%9A%E5%AE%9A%E4%BD%8D"><span class="toc-text">一、固定定位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%9B%B8%E5%AF%B9%E5%AE%9A%E4%BD%8D"><span class="toc-text">二、相对定位</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D"><span class="toc-text">三、绝对定位</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E9%A2%98%E4%BC%AA%E7%B1%BB"><span class="toc-text">结构题伪类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#border-collapse"><span class="toc-text">border-collapse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E5%85%83%E7%B4%A0"><span class="toc-text">伪元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#text-shadow"><span class="toc-text">text-shadow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%92%E5%AD%90%E9%98%B4%E5%BD%B1"><span class="toc-text">盒子阴影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Border-radius"><span class="toc-text">Border-radius</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E5%BA%A6"><span class="toc-text">透明度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%87%E6%B8%A1"><span class="toc-text">过渡</span></a></li></ol></div></div></div>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-17T05:54:00.000Z">2023-04-17</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>css笔记</span></h1>
+<h3 id="复合选择器"><a href="#复合选择器" class="headerlink" title="复合选择器"></a>复合选择器</h3><ul>
+<li>多元素选择器：选择器1,选择器2{属性:值;}</li>
+<li>后代元素选择器：E F{属性:值;}</li>
+<li>子元素选择器：E &gt; F{属性:值;}</li>
+<li>相邻元素选择器：E + F{属性:值;}</li>
+</ul>
+<h3 id="！Important-属性"><a href="#！Important-属性" class="headerlink" title="！Important 属性"></a>！Important 属性</h3><p>内容介绍</p>
+<p>一、什么是 important</p>
+<p>二、!important 在 CSS 中的作用</p>
+<p>三、语法格式</p>
+<p>一、什么是 important</p>
+<p>important 在英文中含义是“重要的”意思</p>
+<p>二、!important 在 CSS 中的作用</p>
+<p>它主要是用来提升属性的女重。其属性的权重值无穷大</p>
+<p>三、语法格式</p>
+<p>使用！Important属性的语法格式</p>
+<p>属性：值！Important</p>
+<p>P{</p>
+<p>加了！Important的属性它的权重值会变得无穷</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Color:#foo！Important</span><br><span class="line"></span><br><span class="line">P1&#123;Color:#foo ;</span><br><span class="line"></span><br><span class="line">#P2&#123;Color:#foo；</span><br></pre></td></tr></table></figure>
+<p>一定要注意！import 的语法规则：</p>
+<p>Ø  正确的写法</p>
+<p>n  属性：值 ！important;</p>
+<p>Ø  错误的写法</p>
+<p>n  属性：值；！important; （不能将！important 写在分号的外面 一定要写在分号的里面）</p>
+<p>n  属性：值 important; （！不能省略）</p>
+<p>使用！important 一定要注意以下几点：</p>
+<p>1，！important 它是提升的属性的权重，而不是提升选择器的权重！</p>
+<p>上图的效果：</p>
+<p>文本的颜色是听加了！important 的属性， 文本的大小是听 ID 选择器的 因为！important 它只是提升了属性的权重并没有提升选择器的优先级。</p>
+<p>2，！important 它不能提升继承过来的权重! </p>
+<h3 id="浮动简介"><a href="#浮动简介" class="headerlink" title="浮动简介"></a>浮动简介</h3><p>需求:</p>
+<p>能够实现让多个元素排在同一行，并且给这些元素设置宽度与高度!让多个元素排在同一行:行内元素的特性</p>
+<p>给这些元素设置宽高:块级元素的特性</p>
+<p>在标准文档流中的元素只有两种:块级元素和行内元素。如果想让一些元素既要有块级</p>
+<p>元素的特点也要有行内元素的特点，只能让这些元素脱离标准文档流。</p>
+<p>浮动可以让元素脱离标准文档流就可以实现让多个元素排在同一行并且可以设置宽高!</p>
+<p>浮动它是通过一个浮动属性来实现</p>
+<p>float:这个属性有两个值left(向左浮动)向左移动、right(向右浮动)</p>
+<p>向右移动浮动元素的特性:</p>
+<p>l  浮动元素它脱离标准文档流它不再占用空间了</p>
+<p>l  我们可以把浮动元素理解为“漂”</p>
+<p>l  浮动元素它的层级要比标准文档流里面的元素层级要高，它会将标准文档流中的元素给压盖住</p>
+<p>l  浮动元素它遇到了父元素的边框然后就停止了浮动</p>
+<p>l  浮动元素它还会遇到上一个浮动元素后就停止了浮动</p>
+<p>l  浮动元素浮动以后 其父元素不会再包裹着浮动元素</p>
+<p>l  我们将行内元素进行浮动以后 那么这个行内元素它会变成块级元素</p>
+<h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><ul>
+<li>block 转换为块级元素</li>
+<li>inline 转换为行内元素</li>
+<li>none 隐藏元素</li>
+</ul>
+<h3 id="position"><a href="#position" class="headerlink" title="position"></a>position</h3><p>css中定位分为3种：</p>
+<ul>
+<li>position:fixed 固定定位</li>
+<li>position:relative 现对定位</li>
+<li>position:absolute 绝对定位<br>注意：<br>在使用定位属性时，一定要配合定位的坐标来使用<br>left:定位元素离左边多远<br>right:定位元素离右边多远<br>top:定位元素离上边多远<br>bottom:定位元素离下边多远<h4 id="一、固定定位"><a href="#一、固定定位" class="headerlink" title="一、固定定位"></a>一、固定定位</h4>position:fixed<br>固定定位：它时相对于浏览器窗口来进行定位。不管页面如何滚动，固定定位元素现实的位置不会改变！<br>特点：<br>  固定定位元素它脱离了标准文档流<br>  固定定位元素的层级比标准文档流里面的元素要高，所以固定定位元素它会压盖住标准文档里面的元素<br>  固定定位元素它不再占用空间<br>  固定定位元素它现实的位置不会随着浏览器滚动而滚动</li>
+</ul>
+<h4 id="二、相对定位"><a href="#二、相对定位" class="headerlink" title="二、相对定位"></a>二、相对定位</h4><p>相对定位相当于“自己”来定位；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：position: relative;            </span><br></pre></td></tr></table></figure>
+<p>特点：</p>
+<p>1.相对定位元素它没有脱离标准文档流</p>
+<p>2.相对定位元素没有设置定位坐标，那么相对定位元素还在原来位置</p>
+<p>3.相对定位元素设置了定位坐标，就会在原位置留下一个空白元素</p>
+<p>4.相对定位元素会将标准文档流中的元素压盖住</p>
+<p>5.相对定位元素的定位值可以为负数</p>
+<p>/<em>设置定位坐标</em>/</p>
+<p>Lift: 100px;</p>
+<p>注意：</p>
+<p>/<em>相对定位属性</em>/Position: relative;</p>
+<p>相对定位元素一般很少单独使用，主要是用来配合“绝对定位”元素来使用</p>
+<h4 id="三、绝对定位"><a href="#三、绝对定位" class="headerlink" title="三、绝对定位"></a>三、绝对定位</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法:</span><br><span class="line">position:absolute;</span><br></pre></td></tr></table></figure>
+<p>三、特点</p>
+<p>特点：</p>
+<p> 绝对定位元素它脱离了标准文档流。</p>
+<p> 绝对定位元素它不再占用空间。</p>
+<p> 绝对定位元素它会压盖住标准文档流中的元素。</p>
+<p> 绝对定位元素他会相对于其祖先定位元素来进行定位，这里的祖先定位元素可以是相对定位也可以是固定定位还可以是绝对定位，但是我们一般只会给其祖先定位元素设置相对定位属性“子绝父相”子元素设置绝对定位父元素设置相对定位。</p>
+<h3 id="结构题伪类"><a href="#结构题伪类" class="headerlink" title="结构题伪类"></a>结构题伪类</h3><p>二、结构伪类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">选择器                    功能</span><br><span class="line"></span><br><span class="line">1.E:first-child         匹配第一个孩子</span><br><span class="line"></span><br><span class="line">2.E;last-child          匹配最后一个孩子</span><br><span class="line"></span><br><span class="line">3.E:nth-child(n)        匹配第n个孩子</span><br><span class="line"></span><br><span class="line">4.E:nth-child(2n)或     匹配偶数的孩子</span><br><span class="line"></span><br><span class="line">E:nth-child(even)</span><br><span class="line"></span><br><span class="line">5. E:nth-child(2n+1)     匹配奇数的孩子</span><br><span class="line"></span><br><span class="line">E;nth-child(odd)</span><br><span class="line"></span><br><span class="line">6.E:only-childo         匹配有且只有一个孩子</span><br></pre></td></tr></table></figure>
+<h3 id="border-collapse"><a href="#border-collapse" class="headerlink" title="border-collapse"></a>border-collapse</h3><p>简介<br>这个属性主要是用于来合并边框线 其值为：collapse</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-collapse : collapse;</span><br></pre></td></tr></table></figure>
+<h3 id="伪元素"><a href="#伪元素" class="headerlink" title="伪元素"></a>伪元素</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">选择器                功能</span><br><span class="line"></span><br><span class="line">:first-letter         操作当前元素中第一个字</span><br><span class="line"></span><br><span class="line">:first-line           操作当前元素中第一行</span><br><span class="line"></span><br><span class="line">:beforerw             在之前插入，在一一个盒子内部的最前面</span><br><span class="line"></span><br><span class="line">:afterp               在之后插入，在一个盒子内部的最后面</span><br></pre></td></tr></table></figure>
+<h3 id="text-shadow"><a href="#text-shadow" class="headerlink" title="text-shadow"></a>text-shadow</h3><p>text-shadow:水平阴影 垂直阴影 模糊距离 阴影颜色。</p>
+<p>注释: text-shadow 属性向文本添加一个或多个阴影。该属性是逗号分隔的阴影列表，每个阴影有两个或三个长度值和一个可选的颜色值进行规定。省略的长度是0。</p>
+<p>描述:</p>
+<p>●文字阴影可以有多组值，多组之间用逗号隔开就可以。</p>
+<p>●水平阴影正值阴影在右边，负值在左边。</p>
+<p>●垂直阴影正值在下边，负值在上边。</p>
+<p>●模糊强度，值越大越模糊。</p>
+<h3 id="盒子阴影"><a href="#盒子阴影" class="headerlink" title="盒子阴影"></a>盒子阴影</h3><p>内容介绍</p>
+<p>一、Box-shadow</p>
+<p>二、盒子阴影</p>
+<p>三、图片阴影</p>
+<p>一、Box-shadow</p>
+<p>水平方向阴影、垂直方向阴影、模糊距离、阴影尺寸、阴影颜色、内/外阴影。</p>
+<p>二、盒子阴影<br>border:1px solid#000;/*给这个盒子设置阴影语法格式:<br>box-shadow:  水平方向的阴影 垂直方向的阴影 阴影的清晰度 阴影的大小 阴影的颜色 阴影的位置<br>1.盒子阴影可以有多组值，多组之间用逗号隔开。</p>
+<p>2.水平阴影正值阴影在右边，负值在左边。</p>
+<p>3.垂直阴影正值在下边，负值在上边。</p>
+<p>4.模糊尺寸，值越大越模糊。</p>
+<p>Box-shadow:(两组阴影)3px 3px 3px 3px #f00,-4px -4px 2px 2px #DA70D6（颜色）0 inset;}</p>
+<p>三、图片阴影</p>
+<h3 id="Border-radius"><a href="#Border-radius" class="headerlink" title="Border-radius"></a>Border-radius</h3><p>Border-radius：左上 右上 右下 左下</p>
+<h3 id="透明度"><a href="#透明度" class="headerlink" title="透明度"></a>透明度</h3><p>CSS 透明度</p>
+<p>只要是颜色，都可以用透明度</p>
+<p>Rgba（红色，绿色，蓝色，透明度）</p>
+<p>a：表示透明度的意思  透明度取值：0~1之间  0表示完全透明  1表示不透明</p>
+<p>·背景颜色透明</p>
+<p>Background-color:rgba(255,255,255,0.3)</p>
+<p>·文件颜色透明</p>
+<p>Coler:rgba(255,255,255,0.3)</p>
+<p>·边框颜色透明</p>
+<p>Border:1px soild rgba(255,255,255,0.5)</p>
+<h3 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition</span><br></pre></td></tr></table></figure>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/17/note-opencv/">opencv笔记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/10/2023-4-19_vscode-plugin/">VSCode 最全实用插件目录</a></div></section></div>
+
+
+
+
+
+
+  <div class='related-wrap md reveal' id="comments">
+    <div class='cmt-title cap theme'>
+      快来参与讨论吧
+    </div>
+    <div class='cmt-body giscus'>
+      
+
+<svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="giscus" data-repo="Alanosy/comment_blog" data-repo-id="R_kgDONlpusg" data-category="Announcements" data-category-id="DIC_kwDONlpuss4Clthk" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" src="https://giscus.app/client.js"></div>
+
+    </div>
+  </div>
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.13.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.13.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadJS() {
+    const els = document.querySelectorAll("#comments #giscus");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.log(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    loadJS();
+  });
+</script>
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

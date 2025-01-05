@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.2">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.13.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>JavaWeb - Alan</title>
+
+  
+    <meta name="description" content="简单请求参数http:&#x2F;&#x2F;localhost:8080&#x2F;xxx?name&#x3D;1&amp;age&#x3D;2 123456@RequestMapping(&quot;&#x2F;simpleParam&quot;)public String simpleParam(HttpServletRequest request)&amp;#123;    String name &#x3D; request.getParameter(&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb">
+<meta property="og:url" content="https://alan.org.cn/2023/04/17/2023615-JavaWeb/index.html">
+<meta property="og:site_name" content="Alan">
+<meta property="og:description" content="简单请求参数http:&#x2F;&#x2F;localhost:8080&#x2F;xxx?name&#x3D;1&amp;age&#x3D;2 123456@RequestMapping(&quot;&#x2F;simpleParam&quot;)public String simpleParam(HttpServletRequest request)&amp;#123;    String name &#x3D; request.getParameter(&quot;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-17T08:38:00.000Z">
+<meta property="article:modified_time" content="2024-06-07T02:33:18.059Z">
+<meta property="article:author" content="Alan">
+<meta property="article:tag" content="技术分享">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="https://blog-alan.oss-cn-hangzhou.aliyuncs.com/head/heads.png">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header">
+
+<div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.2/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="https://blog-alan.oss-cn-hangzhou.aliyuncs.com/head/heads.png" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Alan</div></a></div>
+
+
+<nav class="menu dis-select"><a class="nav-item" href="/index/">首页</a><a class="nav-item active" href="/">文章</a><a class="nav-item" href="/wiki/">项目</a></nav>
+</header>
+
+
+<div class="widgets">
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">JavaWeb</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0"><span class="toc-text">简单请求参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%95%B0%E7%BB%84%E5%8F%82%E6%95%B0"><span class="toc-text">接收数组参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E6%9C%9F%E5%8F%82%E6%95%B0"><span class="toc-text">日期参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Json%E5%8F%82%E6%95%B0"><span class="toc-text">Json参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%8F%82%E6%95%B0"><span class="toc-text">路径参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%BA%94%E6%95%B0%E6%8D%AE"><span class="toc-text">相应数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B1%82%E8%A7%A3%E8%80%A6"><span class="toc-text">分层解耦</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%B1%82"><span class="toc-text">分层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E8%97%95"><span class="toc-text">解藕</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IOC-amp-DI%E5%85%A5%E9%97%A8"><span class="toc-text">IOC&amp;DI入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IOC%E8%AF%A6%E8%A7%A3"><span class="toc-text">IOC详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DI%E8%AF%A6%E8%A7%A3"><span class="toc-text">DI详解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mysql"><span class="toc-text">Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Sql"><span class="toc-text">Sql</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DDL"><span class="toc-text">DDL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E7%BB%93%E6%9E%84%E6%9F%A5%E8%AF%A2"><span class="toc-text">表结构查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">修改表结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DML"><span class="toc-text">DML</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DLQ"><span class="toc-text">DLQ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E8%AE%BE%E8%AE%A1"><span class="toc-text">多表设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-text">多表查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1"><span class="toc-text">事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MyBatis"><span class="toc-text">MyBatis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="toc-text">基础操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XML%E6%98%A0%E5%B0%84%E6%96%87%E4%BB%B6"><span class="toc-text">XML映射文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81SQL"><span class="toc-text">动态SQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83-Restful"><span class="toc-text">开发规范-Restful</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pageHelper%E6%8F%92%E4%BB%B6"><span class="toc-text">pageHelper插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yml"><span class="toc-text">yml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A0%A1%E9%AA%8C"><span class="toc-text">数据校验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D"><span class="toc-text">会话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%A8%E5%9F%9F"><span class="toc-text">跨域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session"><span class="toc-text">Session</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A4%E7%89%8C%E6%8A%80%E6%9C%AF"><span class="toc-text">令牌技术</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT-%EF%BC%88Json-Web-Token%EF%BC%89"><span class="toc-text">JWT （Json Web Token）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8Filter"><span class="toc-text">过滤器Filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8interceptor"><span class="toc-text">拦截器interceptor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E7%89%A9%E5%A4%84%E7%90%86-amp-AOP"><span class="toc-text">事物处理&amp;AOP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E7%89%A9%E8%BF%9B%E9%98%B6"><span class="toc-text">事物进阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOP"><span class="toc-text">AOP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AOP%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">AOP核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%9F%A5%E7%B1%BB%E5%9E%8B"><span class="toc-text">通知类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%87%E5%85%A5%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-text">切入点表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E7%82%B9"><span class="toc-text">连接点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">配置优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven%E5%88%86%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91"><span class="toc-text">Maven分模块开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E9%94%81%E5%AE%9A"><span class="toc-text">版本锁定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%81%9A%E5%90%88"><span class="toc-text">聚合</span></a></li></ol></div></div></div>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-04-17T08:38:00.000Z">2023-04-17</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>JavaWeb</span></h1>
+<h2 id="简单请求参数"><a href="#简单请求参数" class="headerlink" title="简单请求参数"></a>简单请求参数</h2><p><a target="_blank" rel="noopener" href="http://localhost:8080/xxx?name=1&amp;age=2">http://localhost:8080/xxx?name=1&amp;age=2</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(HttpServletRequest request)</span>&#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">age</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> name+age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(String name, Integer age)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> name+age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果参数名不匹配，则使用@RequestParam建立映射</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simpleParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simpleParam</span><span class="params">(<span class="meta">@RequestParam(name=&quot;name&quot;,required = false)</span>String username, Integer age)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> username+age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将参数封装到实体类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/simplePojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">simplePojo</span><span class="params">(User user)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> user.getName() +user.getAge();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="接收数组参数"><a href="#接收数组参数" class="headerlink" title="接收数组参数"></a>接收数组参数</h2><p><a target="_blank" rel="noopener" href="http://localhost:8080/xxx?hobby=1&amp;hobby=2&amp;hobby=3">http://localhost:8080/xxx?hobby=1&amp;hobby=2&amp;hobby=3</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/arrayParam&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">arrayParam</span><span class="params">(String[] hobby)</span>&#123;</span><br><span class="line"></span><br><span class="line">    System.out.println(Arrays.toString(hobby));</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/arrayParam2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">arrayParam2</span><span class="params">(<span class="meta">@RequestParam</span> List&lt;String&gt; hobby)</span>&#123;</span><br><span class="line"></span><br><span class="line">    System.out.println(hobby);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="日期参数"><a href="#日期参数" class="headerlink" title="日期参数"></a>日期参数</h2><p><a target="_blank" rel="noopener" href="http://localhost:8080/xxx?updateTime-2022-12-12">http://localhost:8080/xxx?updateTime-2022-12-12</a> 10:05:45</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/arrayParam3&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">arrayParam3</span><span class="params">(<span class="meta">@DateTimeFormat(pattern=&quot;yyyy-MM-dd HH:mm:ss&quot;)</span>LocalDateTime updateTime)</span>&#123;</span><br><span class="line">    System.out.println(updateTime);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Json参数"><a href="#Json参数" class="headerlink" title="Json参数"></a>Json参数</h2><p>json数据键名与形参属姓名相同，定义pojo类型即可接收参数，需要使用@RequesBody标示</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="string">&quot;Tom&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span><span class="number">10</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="string">&quot;shanghai&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/arrayParam4&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">arrayParam4</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span>&#123;</span><br><span class="line">    System.out.println(user);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="路径参数"><a href="#路径参数" class="headerlink" title="路径参数"></a>路径参数</h2><p>通过请求URL直接换地参数用{}来识别路径参数，需要使用@PathVariable来获取路径参数</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/arrayParam5/1">http://localhost:8080/arrayParam5/1</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/arrayParam5/&#123;id&#125;&quot;)</span><br><span class="line">public String arrayParam5(@PathVariable Integer id)&#123;</span><br><span class="line">    System.out.println(id);</span><br><span class="line"></span><br><span class="line">    return &quot;ok&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/arrayParam5/1/2">http://localhost:8080/arrayParam5/1/2</a></p>
+<p>@RequestMapping(“/arrayParam5/{id}/{name}”)<br>public String arrayParam5(@PathVariable Integer id,@PathVariable Integer name){<br>    System.out.println(id+name);</p>
+<pre><code>return &quot;ok&quot;;
+</code></pre>
+<p>}</p>
+<h2 id="相应数据"><a href="#相应数据" class="headerlink" title="相应数据"></a>相应数据</h2><p>都来源于注解@ResponseBody只不过@RestController中已经包含</p>
+<p>返回字符串就直接但会</p>
+<p>实体类对象会转json</p>
+<p>数组依然是数组</p>
+<p>统一都响应结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Result&#123;</span><br><span class="line">	//相应码，1代表成果，0代表失败</span><br><span class="line">	private Integetr code;</span><br><span class="line">	//提示信息</span><br><span class="line">	private String msg;</span><br><span class="line">	//返回数据</span><br><span class="line">	private Object data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="分层解耦"><a href="#分层解耦" class="headerlink" title="分层解耦"></a>分层解耦</h2><h3 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h3><p>三层架构：数据访问(Dao)、逻辑处理(Service)、接收请求响应数据(Controller)</p>
+<ul>
+<li>controller：控制层，，接收前端发送到请求，对请求进行处理，并响应数据。</li>
+<li>service：业务逻辑层，处理具体的业务逻辑</li>
+<li>dao：数据访问层（Data Access Object）（持久层），负责数据访问操作，包括增删改查</li>
+</ul>
+<h3 id="解藕"><a href="#解藕" class="headerlink" title="解藕"></a>解藕</h3><ul>
+<li>内聚：软件中各个功能模块内部的功能联系</li>
+<li>耦合：衡量软件中各个层/模块之间的依赖、关联的层度。</li>
+<li>软件设计原则：高内聚低耦合</li>
+</ul>
+<p>控制反转：IOC，对象的创建控制权由程序自身转移到外部（容器）</p>
+<p>依赖注入：DI，容器为应用程序提供运行时，所依赖的资源</p>
+<p>Bean对象：IOC容器中传教、管理的对象</p>
+<h2 id="IOC-amp-DI入门"><a href="#IOC-amp-DI入门" class="headerlink" title="IOC&amp;DI入门"></a>IOC&amp;DI入门</h2><p>控制反转</p>
+<p>@Component  将当前类交给IOC容器，成为IOC容器中的bean</p>
+<p>依赖注入</p>
+<p>@Autowired  运行时，IOC容器会提供该类型的bean对象，并复制给该变量</p>
+<h2 id="IOC详解"><a href="#IOC详解" class="headerlink" title="IOC详解"></a>IOC详解</h2><table>
+<thead>
+<tr>
+<th>@Componet</th>
+<th>声明bean的基础注解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Controller</td>
+<td>标注在控制器类上</td>
+</tr>
+<tr>
+<td>@Service</td>
+<td>标注在业务类上</td>
+</tr>
+<tr>
+<td>@Repository</td>
+<td>标注在数据访问类上（由于mybiatis整合，用到少）</td>
+</tr>
+</tbody></table>
+<p>Bean默认名字为首字母小写的类名</p>
+<p>如果需要改名字可以在注解后面加括号设置</p>
+<p>@Repository(“daoA”)</p>
+<p>@SpringBootApplication默认包含扫描器范围为当前包和子包</p>
+<p>@ComponentScan为扫描</p>
+<p>@ComponentScan({“dao”,”com.alan”})指定扫描那个包（不推荐）</p>
+<h2 id="DI详解"><a href="#DI详解" class="headerlink" title="DI详解"></a>DI详解</h2><p>因为默认是按类型进行的，如果存在多个相同类型的bean会报错</p>
+<p>通常使用一下几种方案来解决</p>
+<ul>
+<li>@Primary 优先级</li>
+<li>@Qualifier 指定需要注入对应名字的bean</li>
+<li>@Resource 指定需要注入对应名字的bean，且不需要autowired注解了</li>
+</ul>
+<h2 id="Mysql"><a href="#Mysql" class="headerlink" title="Mysql"></a>Mysql</h2><p>关系型数据库（RDBMS）建立在关系模型基础上，由多张互相连接的二维表组成的数据库</p>
+<h3 id="Sql"><a href="#Sql" class="headerlink" title="Sql"></a>Sql</h3><ul>
+<li>可以单行或多行书写，以分号结尾</li>
+<li>可以使用空格/缩进来增强可读性</li>
+<li>不区分大小写</li>
+<li>注释<ul>
+<li>单行：–</li>
+<li>多行/* */</li>
+</ul>
+</li>
+</ul>
+<p>分类</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DDL</td>
+<td>数据定义语言，定义数据库对象（数据库，表，字段）</td>
+</tr>
+<tr>
+<td>DMl</td>
+<td>数据操作语言，对数据库表中的数据CUDA</td>
+</tr>
+<tr>
+<td>DQL</td>
+<td>数据查询语言，用来查询数据库表中的记录</td>
+</tr>
+<tr>
+<td>DCL</td>
+<td>数据库控制语言，用来创建数据库用户、控制数据库的访问权限</td>
+</tr>
+</tbody></table>
+<p><strong>需求+原型</strong></p>
+<p><strong>设计</strong></p>
+<p>概要设计、详细设计、接口设计、数据库设计</p>
+<p>Java程序</p>
+<p>优化-&gt;数据库优化</p>
+<h2 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h2><p>**数据库 **</p>
+<p>查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询所有数据库：show databases;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询当前数据库: selsect database();</span><br></pre></td></tr></table></figure>
+
+<p>使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用数据库：use 数据库名；</span><br></pre></td></tr></table></figure>
+
+<p>创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">创建数据库：create database [if not exists] 数据库名;</span><br></pre></td></tr></table></figure>
+
+<p>删除</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">删除数据库: drop database [if exists] 数据库名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>表</strong></p>
+<p>[]可选</p>
+<p>创建</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">	字段<span class="number">1</span> 字段类型 [约束] [comment 字段<span class="number">1</span>注释],</span><br><span class="line">  ......</span><br><span class="line">  字段n 字段类型 [约束] [comment 字段n注释],</span><br><span class="line">)[comment 表注释]</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb_user(</span><br><span class="line">    id <span class="type">int</span> <span class="keyword">primary</span> key auto_increment comment <span class="string">&#x27;ID,唯一标示&#x27;</span>,</span><br><span class="line">    username <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">unique</span> comment <span class="string">&#x27;用户名&#x27;</span>,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">    age <span class="type">int</span> comment <span class="string">&#x27;年龄&#x27;</span>,</span><br><span class="line">    gender <span class="type">char</span>(<span class="number">1</span>) <span class="keyword">default</span> <span class="string">&#x27;男&#x27;</span> comment <span class="string">&#x27;性别&#x27;</span></span><br><span class="line">    ) comment <span class="string">&#x27;用户表&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>约束</strong></p>
+<p>概念：约束是作用于表中字段上的规则，用于限制存储在表中的数据</p>
+<p>目的：保证数据库中数据的正确性，有效性，完整性</p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>描述</th>
+<th>关键字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>非空约束</td>
+<td>限制改字段值不能为null</td>
+<td>not null</td>
+</tr>
+<tr>
+<td>唯一约束</td>
+<td>保证字段的所有数据都是唯一，不重复的</td>
+<td>unique</td>
+</tr>
+<tr>
+<td>主键约束</td>
+<td>主键是一行数据的唯一表示，要求非空且唯一，在后面添加auto_increment自动增加</td>
+<td>primary key</td>
+</tr>
+<tr>
+<td>默认约束</td>
+<td>保存数据时，如果未指定该字段值，则采用默认值</td>
+<td>default</td>
+</tr>
+<tr>
+<td>外键约束</td>
+<td>让两张表的数据建立连接，保证数据的一直性和完整性</td>
+<td>Foreign key</td>
+</tr>
+</tbody></table>
+<p>数据类型：查表</p>
+<h2 id="表结构查询"><a href="#表结构查询" class="headerlink" title="表结构查询"></a>表结构查询</h2><ul>
+<li>查询当前数据库下所有表：show tables;</li>
+<li>查询表结构: desc 表名;</li>
+<li>查询建表语句: show create table 表名;</li>
+</ul>
+<h2 id="修改表结构"><a href="#修改表结构" class="headerlink" title="修改表结构"></a>修改表结构</h2><ul>
+<li>添加字段: alter table 表名 add 字段名 类型(长度) [comment 注释] [约束];</li>
+<li>修改字段类型: alter table 表名 modify 字段名 新数据类型(长度);</li>
+<li>修改字段名和字段类型: alter table 表名 change 旧字段名 新字段名 类型(长度) [comment 注释] [约束]</li>
+<li>删除字段: alter table 表名 drop column 字段名;</li>
+<li>修改表名: rename table 表名 to 新表名;</li>
+<li>删除表: drop table if exists 表名;</li>
+</ul>
+<p>在删除表结构时，数据也会被删除</p>
+<h2 id="DML"><a href="#DML" class="headerlink" title="DML"></a>DML</h2><p><strong>插入数据</strong></p>
+<ul>
+<li>指定字段添加数据: insert into 表名 (字段1,字段2) values (值1,值2);</li>
+<li>全部字段添加数据: insert into 表名 values (值1,值2,…);</li>
+<li>批量添加数据(指定字段): insert into 表名 (字段名1,字段名2) values (值1,值2),(值1,值2);</li>
+<li>批量添加数据(全部字段):insert into 表名 values (值1，值2…),(值1，值2…);</li>
+</ul>
+<p>更新时间可以使用now();</p>
+<p>前面有多少个字段，有面就需要多少个值</p>
+<p>字符串和日期需要用引号阔起来</p>
+<p>插入的数据大小应该在字段限制之内</p>
+<p><strong>更新数据</strong></p>
+<ul>
+<li>修改数据: update 表名 set 字段名1=值1，字段名2=值2…. [where 条件];</li>
+</ul>
+<p>没有where会更新整张表</p>
+<p><strong>删除</strong></p>
+<ul>
+<li>删除数据: delete from 表名 [where 条件];</li>
+</ul>
+<p>没有条件会清空整张表的数据</p>
+<p>不能删除某一个字段的值，如果要操作使用update设置为null</p>
+<h2 id="DLQ"><a href="#DLQ" class="headerlink" title="DLQ"></a>DLQ</h2><p>用来查询数据库中的记录Select</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">	字段列表</span><br><span class="line"><span class="keyword">from</span></span><br><span class="line">	表名列表</span><br><span class="line"><span class="keyword">where</span></span><br><span class="line">	条件列表</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span></span><br><span class="line">	分组字段列表</span><br><span class="line"><span class="keyword">having</span></span><br><span class="line">	分组后条件列表</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span></span><br><span class="line">	排序字段列表</span><br><span class="line">limit</span><br><span class="line">	分页参数</span><br></pre></td></tr></table></figure>
+<p><strong>基本查询</strong></p>
+<ul>
+<li>查询多个字段：select 字段1，字段2 from 表名;</li>
+<li>查询所有字段: select * from 表名;</li>
+<li>设置别名: select 字段1 [as 别名1] from 表名;</li>
+<li>去除重复记录: select distinct 字段列表 from 表名;</li>
+</ul>
+<p><strong>条件查询</strong></p>
+<ul>
+<li>条件查询: select 字段列表 from 表名 where 条件列表;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>比较运算符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&gt;</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt;或!=</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>between … and …</td>
+<td>在某个范围之内（含最小，最大值）</td>
+</tr>
+<tr>
+<td>in(…)</td>
+<td>在in之后的列表中的值，多选一</td>
+</tr>
+<tr>
+<td>like 占位符</td>
+<td>模糊匹配使用通配符’_’单个字符‘%’任意字符</td>
+</tr>
+<tr>
+<td>is null</td>
+<td>是null</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>逻辑运算符</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>and或&amp;&amp;</td>
+<td>并且</td>
+</tr>
+<tr>
+<td>or或||</td>
+<td>或者</td>
+</tr>
+<tr>
+<td>not或|</td>
+<td>非</td>
+</tr>
+</tbody></table>
+<p>select * from tb_tmp where name=’杨逍’;</p>
+<p>select * from tb_tmp where id &lt;= 5;</p>
+<p>select * from tb_tmp where job is null;</p>
+<p>select * from tb_tmp where job is not null;</p>
+<p>select * from tb_tmp where password != ‘123456’;</p>
+<p>select * from tb_tmp where entry data &gt;= ‘2000-01-01’ and data &lt;=’2010-01-01’;</p>
+<p>select * from tb_tmp where between ‘2000-01-01’ and ‘2010-01-01’;</p>
+<p>select * from tb_tmp where between ‘2000-01-01’ and ‘2010-01-01’ and gender =2;</p>
+<p>select * from tb_tmp where  job = 2 or job = 3 or job= 4;</p>
+<p>select * from tb_tmp where job in (2,3,4) ;</p>
+<p>select * from tb_tmp where name like ‘__’;</p>
+<p>select * from tb_tmp where name like ‘张%’;</p>
+<p><strong>分组查询</strong></p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>count</td>
+<td>统计数量</td>
+</tr>
+<tr>
+<td>max</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>avg</td>
+<td>平均值</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>求和</td>
+</tr>
+</tbody></table>
+<p>语法：select 聚合函数(字段列表) from 表名;</p>
+<p>统计企业员工数量</p>
+<p>Select count(id) from tb_emp;//不对null记述</p>
+<p>Select count(0) from tb_emp;//不对null记述</p>
+<p>Select count(*) from tb_emp;//不对null记述</p>
+<p>推荐count(*)</p>
+<p>最早入职的员工</p>
+<p>select min(entrydate) from tb_emp;</p>
+<p>最迟入职员工</p>
+<p>select max(entry date) from tb_emp;</p>
+<p>统计某列的平均值</p>
+<p>select avg(xx) from table;</p>
+<p>求和</p>
+<p>select sum(xx) from table;</p>
+<p><strong>分组查询</strong></p>
+<p>只能返回： 分组字段或聚合函数</p>
+<p>语法:select 字段列表 from 表名 [where 条件] group by 分组字段名 [having 分组后的条件];</p>
+<p>根据性别分组，统计男生于女生的数量</p>
+<p>select gender,count(*)  from tb_emp group by gender;</p>
+<p>先查询入职之间在xxx-xxx 以前的员工，并结果根据职位分组，获取员工数量大于等于2的职位</p>
+<p>select job, count(*) from tb_emp where entrydate &lt;= ‘xxx’ group by job having count(*) &gt;=2;</p>
+<p><strong>排序查询</strong></p>
+<p>select 字段列表 from 表名 [where 条件] [group by 分组字段] order by 字段1 排序方式，字段2 排序方式…;</p>
+<p>asc升序</p>
+<p>desc降序</p>
+<p><strong>分页查询</strong></p>
+<p>select 字段列表 from 表名 limit 起始索引，查询记录条数;</p>
+<p>从启始索引0开始查询员工数据，每页展示5条记录</p>
+<p>select * from tb_emp limit 0,5;</p>
+<p>从启始第1页开始查询员工数据，每页展示5条记录</p>
+<p>select * from tb_emp limit 0,5;</p>
+<p>从启始第2页开始查询员工数据，每页展示5条记录</p>
+<p>select * from tb_emp limit 5,5;</p>
+<p>从启始第3页开始查询员工数据，每页展示5条记录</p>
+<p>select * from tb_emp limit 10,5;</p>
+<p>启始索引（页码-1）*每页展示记录数</p>
+<p><strong>案例</strong></p>
+<p>按需求完成员工管理的条件分页查询，根据输入条件，查询第一页数据，每页展示10条记录</p>
+<p>select * from tb_emp where name like ‘张%’ and gender = 1 and entrydate between ‘xxx’ and ‘xxx’ order by update desc limit 0,10 ;</p>
+<ul>
+<li>if(条件，true取值，false取值)</li>
+</ul>
+<p>select if(gender=1,’男性员工’,’女性员工’)  性别 ,count(*) from tb_emp group by gender;</p>
+<ul>
+<li>case 表达式 when 值1 then结果1 when 值2 then 结果2 else … end.</li>
+</ul>
+<p>select (case job when 1 then ‘班主任’ when 2 then ‘讲师’ else ‘未分配职位’ end) 职位,count(*) from tb_emp froup by job;</p>
+<h2 id="多表设计"><a href="#多表设计" class="headerlink" title="多表设计"></a>多表设计</h2><p><strong>一对多</strong></p>
+<p>多的一方关联一的一方</p>
+<p>问题分析：两张表，在数据库层面并未建立关联，所以是无法保证数据的一致性和完整性的</p>
+<p><strong>外键语法</strong></p>
+<p>创建表时指定(所有字段罗列完后在最后添加)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 表名(</span><br><span class="line">	字段名 数据类型</span><br><span class="line">	...</span><br><span class="line">	[<span class="keyword">constraint</span>] [外键名称] <span class="keyword">foreign</span> key (外键字段名) <span class="keyword">references</span> 主表 (字段名称)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>建完表后，添加外键</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> <span class="keyword">constraint</span> 外键名称 <span class="keyword">foreign</span> key (外键字段名) <span class="keyword">references</span> 主表(字段名);</span><br></pre></td></tr></table></figure>
+<p>这种外键叫物理外键</p>
+<p>概念：使用foreign key 定义外键关联另外一张表</p>
+<p>缺点：</p>
+<ul>
+<li>影响CRUD</li>
+<li>仅用于单节点数据库，不适用分别是，集群场景</li>
+<li>容易引发数据库的死锁问题，消耗性能</li>
+</ul>
+<p>逻辑外键</p>
+<p>概念：在业务层逻辑中，解决外键关联</p>
+<p>通过逻辑外键，就可以很方便的解决上述问题</p>
+<p><strong>一对一</strong></p>
+<p>关系：一对一关系，多用于单表拆分，将一张表的基础字段放在一张表中，其他字段放在另一张表中，以提升操作效率</p>
+<p>如果基本信息查询特别高，查询身份信息很低，可以拆分为两张表</p>
+<p>实现：在任意一方加入外键，关联另一方的主键，并且设置外键为唯一的（UNIQUE）</p>
+<p>*<em>多对多</em></p>
+<p>实现：建立第三张中间表，中间表至少包含两个外键，分别关联两方主键</p>
+<h2 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h2><p><strong>内连接查询</strong></p>
+<p>查询交集部分</p>
+<p>表起别名在表后空格直接加名字</p>
+<p>隐式内连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1</span>,表<span class="number">2</span> <span class="keyword">where</span> 条件...;</span><br></pre></td></tr></table></figure>
+<p>显式内连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1</span> [<span class="keyword">inner</span>] <span class="keyword">join</span> 表<span class="number">2</span> <span class="keyword">on</span> 连接条件...;</span><br></pre></td></tr></table></figure>
+<p><strong>外连接</strong></p>
+<p>左外连接(完全包含左表数据)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1</span> <span class="keyword">left</span> [<span class="keyword">outer</span>] <span class="keyword">join</span> 表<span class="number">2</span> <span class="keyword">on</span> 连接条件...;</span><br></pre></td></tr></table></figure>
+<p>右外连接(完全包含右表数据)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> 字段列表 <span class="keyword">from</span> 表<span class="number">1</span> <span class="keyword">right</span> [<span class="keyword">outer</span>] <span class="keyword">join</span> 表<span class="number">2</span> <span class="keyword">on</span> 连接条件...;</span><br></pre></td></tr></table></figure>
+<p><strong>子查询</strong></p>
+<p>SQL语句中嵌套select语句，成为嵌套查询，又称子查询</p>
+<p>形式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t1 <span class="keyword">where</span> column1<span class="operator">=</span>(<span class="keyword">select</span> column1 <span class="keyword">from</span> t2 ...);</span><br></pre></td></tr></table></figure>
+<p>子查询外部的语句可以式insert/update/delete/select</p>
+<p>分类</p>
+<ul>
+<li>标量子查询：子查询返回的结果为单个值</li>
+</ul>
+<p>常用的操作符：= 、&lt;&gt;、 &gt;、 &gt;=、 &lt;、 &lt;=</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_emp <span class="keyword">where</span> dept_id <span class="operator">=</span> (<span class="keyword">select</span> id <span class="keyword">from</span> tb_dept <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;教研部&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>列子查询：子查询返回的结果为一列</li>
+</ul>
+<p>常用操作符：in 、not in</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_emp <span class="keyword">where</span> dept_id <span class="keyword">in</span> (<span class="keyword">select</span> id <span class="keyword">from</span> tb_dept <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;教研部&#x27;</span> <span class="keyword">or</span> name <span class="operator">=</span> <span class="string">&#x27;咨询部&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>行子查询返回的结果为一行</li>
+</ul>
+<p>常用操作符：=、&lt;&gt;、in 、not in</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_emp <span class="keyword">where</span> (entrydate,job)<span class="operator">=</span>(<span class="keyword">select</span> entrydate,job <span class="keyword">from</span> tb_emp <span class="keyword">where</span> name<span class="operator">=</span><span class="string">&#x27;韦一笑&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>表子查询：子查询返回的结果为多行多列</li>
+</ul>
+<p>常用操作符：in</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.<span class="operator">*</span>,d.name <span class="keyword">from</span> (<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_emp <span class="keyword">where</span> entrydate <span class="operator">&gt;</span> <span class="string">&#x27;2006-01-01&#x27;</span>) e, tb_dept d <span class="keyword">where</span> e.dept_id <span class="operator">=</span> d.id;</span><br></pre></td></tr></table></figure>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>事务是一组操作的集合，它是一个不可分割的工作单位。事物会吧所有的操作作为一个整体一起向系统提交或撤销操作请求，即这些操作要么同时成果，要么同时失效</p>
+<p>注意事项：默认mysql的事物是自动提交的，也就是说，当执行一条dml语句，mysql会立即隐式提交事务</p>
+<p>事务控制</p>
+<ul>
+<li>开启事务：start transaction;/begin;</li>
+<li>提交事物: commit;</li>
+<li>回滚事物: rollback;</li>
+</ul>
+<p>先开启事务，然后执行多条sql如果成功就使用commit，如果失败则使用rollback</p>
+<p>四大特性</p>
+<ul>
+<li>原子性:最小单元，要么全部成功，要么全部失败</li>
+<li>一致性：事物完成时，必须使所有数据都保持一致状态</li>
+<li>隔离性：数据库系统提供的隔离机制，保证事物不受外部兵法操作影响的独立环境下运行</li>
+<li>持久性：事物一旦提交或回滚，它对数据库中数据的改变就是永久的</li>
+</ul>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p>index时帮助数据库高效获取数据的数据结构</p>
+<p>优点：</p>
+<ul>
+<li>提高数据库查询的效率，降低数据库的IO成本</li>
+<li>通过索引列对数据进行排序，降低数据排序的成本，降低CPU消耗</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>索引会占用存储空间</li>
+<li>索引大大提高了查询效率，同时也降低了insert、updata、delete的效率</li>
+</ul>
+<p>B+tree（多路平衡搜索树)</p>
+<p><strong>语法</strong></p>
+<ul>
+<li>创建索引：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> [<span class="keyword">unique</span>] index 索引名 <span class="keyword">on</span> 表名（字段名）;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看索引</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> index <span class="keyword">from</span> 表名;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除索引</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> index 索引名 <span class="keyword">on</span> 表名;</span><br></pre></td></tr></table></figure>
+<h2 id="MyBatis"><a href="#MyBatis" class="headerlink" title="MyBatis"></a>MyBatis</h2><p><strong>快速入门</strong></p>
+<p>使用Mybatis查询所有用户数据</p>
+<p>1、准备工作（创建springboot工程、数据包user、实体类User）</p>
+<p>2、引入Mybatis的相关依赖，配置Mybatis(数据库连接信息)</p>
+<p>3、编写SQL语句（注解/XML）</p>
+<p><strong>四要素</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#驱动类名称</span><br><span class="line">spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</span><br><span class="line">#数据库连接的url</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/mybatis</span><br><span class="line">#连接数据库的用户名</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">#连接数据库的密码</span><br><span class="line">spring.datasource.password=1234</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span>&#123;</span><br><span class="line">  <span class="meta">@Select(&quot;select * from user&quot;)</span></span><br><span class="line">  <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">list</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>JDBC</strong></p>
+<p>jdbc就是使用java语言操作关系型数据库的一套API</p>
+<p>是一套操作关系型数据库的规范，即接口</p>
+<p>各个数据库厂商起实现这套接口，体空数据库的java包</p>
+<p>我们可以使用这套接口编程，真正执行的代码是驱动jar包中的实现类</p>
+<p><strong>数据库连接池</strong></p>
+<p>数据库连接池是个容器，复制分配、管理数据库连接（Connection）</p>
+<p>它运行应用程序重复使用一个现有的数据库连接，而不是再重新建立一个</p>
+<p>释放空闲时间超过最大空闲时间的连接，来避免因为没有释放连接而引起的数据库连接泄漏</p>
+<p>标准接口</p>
+<p>功能：获取链接：Connection getConnection() throws SQLException;</p>
+<p>常见产品</p>
+<p>C3P0、DBCP、DRuid（阿里巴巴开源）、Hikari（springboot默认）</p>
+<p>切换链接池</p>
+<ul>
+<li>引入依赖</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;druid-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">   &lt;version&gt;1.2.8&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置链接信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#驱动类名称</span><br><span class="line">spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</span><br><span class="line">#数据库连接的url</span><br><span class="line">spring.datasource.url=jdbc:mysql://localhost:3306/mybatis</span><br><span class="line">#连接数据库的用户名</span><br><span class="line">spring.datasource.username=root</span><br><span class="line">#连接数据库的密码</span><br><span class="line">spring.datasource.password=1234</span><br></pre></td></tr></table></figure>
+<p><strong>lombok</strong></p>
+<p>lombok是一个实用的java类库，能通过注解的形式自动生成构造器，getter/setter、equals、hashcode、toString等方法，并可以自动化生产日志变了，简化java开发，提高效率</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Getter/@Setter</td>
+<td>为所有的属性提供get/set方法</td>
+</tr>
+<tr>
+<td>@ToString</td>
+<td>会给类自动生成一阅读的toString方法</td>
+</tr>
+<tr>
+<td>@EqualsAndHashCode</td>
+<td>根据类所拥有的非静态字段自动重写equals方法和hashCOde方法</td>
+</tr>
+<tr>
+<td>@Data</td>
+<td>提供了更综合的生成代码功能（@Getter+@Setter+@ToString+@EqualsAndHashCode）</td>
+</tr>
+<tr>
+<td>@NoArgsConstructor</td>
+<td>为实体类生成无参的构造器方法</td>
+</tr>
+<tr>
+<td>@AllArgsConstructor</td>
+<td>为实体类生成处理static修饰的字段之外代有各参数的构造器方法</td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>lombok会在编译时，自动生成对于的java代码。我们使用lombok时，还需要安装一个lombok的插件（idea自带）</p>
+<h2 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h2><p><strong>删除</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Delete(&quot;delete from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br></pre></td></tr></table></figure>
+<p>日志输入</p>
+<p>可以在application.properties中，打开mybatis的日志，并输出到控制台</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mybatis.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl</span><br></pre></td></tr></table></figure>
+<p>预编译sql的优势</p>
+<p>性能更高</p>
+<p>更安全（防止sql注入）</p>
+<p>#{id}就会生成预编译sql</p>
+<p>${id}会直接将参数拼接在后面，存在sql注入问题</p>
+<p><strong>新增</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Insert(&quot;insert into emp(username,name,gender,image,job,entrydate,dept_id,create_time,update_time&quot;+</span></span><br><span class="line"><span class="meta">       &quot; values (#&#123;username&#125;,#&#123;name&#125;,#&#123;gender&#125;,#&#123;image&#125;,#&#123;job&#125;,#&#123;entrydate&#125;,#&#123;dept_id&#125;,#&#123;createTime&#125;,#&#123;updateTime&#125;)&quot;)</span></span><br><span class="line"><span class="meta">public void insert(Emp emp);</span></span><br></pre></td></tr></table></figure>
+<p><strong>主键返回</strong></p>
+<p>在数据添加成功后，需要获取插入数据库数据的主键</p>
+<p>需要在添加的方法上添加注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Options(keyProperty = &quot;id&quot;,useGeneratedKeys=true)</span></span><br></pre></td></tr></table></figure>
+<p>会将主键封装到id属性中，代表我们需要拿到主键值</p>
+<p><strong>更新</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Update(&quot;update emp set username=#&#123;username&#125;,name=#&#123;name&#125;,gender=#&#123;gender&#125;,image=#&#123;image&#125;,job=#&#123;job&#125;,entrydate=#&#123;entrydate&#125;,dept_id=#&#123;deptid&#125;,update_time=#&#123;updateTime where id=#&#123;id&#125;&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Emp emp)</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>查询</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;select * from emp where id=#&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br></pre></td></tr></table></figure>
+<p>数据封装</p>
+<p>实体类书姓名和数据库表查询返回到字段名一致，mybatis会自动封装</p>
+<p>如果实体类书姓名和数据库表查询返回的字段名不一致，不能自动封装</p>
+<ul>
+<li>方案一：给字段起别名，让别名于实体类属性一致</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;select xxx aaa,xxxx aaaa from emp where id=#&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方案二，通过@Results,@Result注解手动映射封装</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Results(&#123;</span></span><br><span class="line"><span class="meta">  @Result(column = &quot;dept_id&quot;,property = &quot;deptId&quot;),</span></span><br><span class="line"><span class="meta">  @Result(column = &quot;create_time&quot;,property = &quot;createTime&quot;),</span></span><br><span class="line"><span class="meta">  @Result(column = &quot;update_time&quot;,property = &quot;updateTime&quot;),</span></span><br><span class="line"><span class="meta">&#125;)</span></span><br><span class="line"><span class="meta">@Select(&quot;select * from emp where id=#&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>方案三：开启mybatis的驼峰命名自动映射开关 a_column —&gt;aColumn</li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis.configuration.map-underscore-to-camel-case</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure>
+<p><strong>条件查询</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Select(&quot;select * from emp where name like concat(&#x27;%&#x27;,#&#123;name&#125;,&#x27;%&#x27;) and gender = #&#123;gender&#125; and entrydate between #&#123;begin&#125; and #&#123;end&#125; order by update_time desc&quot;)</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">list</span><span class="params">(String name,Short gender,LocalDate begin,LocalDate end)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="XML映射文件"><a href="#XML映射文件" class="headerlink" title="XML映射文件"></a>XML映射文件</h2><p><strong>规范</strong></p>
+<ul>
+<li>XML映射文件的名称与Mapper接口名称一致，并且将XML映射文件和Mapper接口放置在相同包下（同包同名）</li>
+<li>XML映射文件的namespace属性为Mapper接口全限定名一致</li>
+<li>XML映射文件中sql语句的id与Mapper接口中的方法名一致，并保持返回类型一致</li>
+</ul>
+<p>在resources下创建包级目录用‘/’</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span></span></span><br><span class="line"><span class="meta">					<span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">					<span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mappser</span> <span class="attr">namespace</span>=<span class="string">&quot;com.alan.mapper.EmpMapper&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;list(方法名)&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.alan.pojo.Emp(返回类型)&quot;</span>&gt;</span></span><br><span class="line">  				select * from emp where name like concat(&#x27;%&#x27;,#&#123;name&#125;,&#x27;%&#x27;) and gender = #&#123;gender&#125; 												and entrydate between #&#123;begin&#125; and #&#123;end&#125; order by update_time desc</span><br><span class="line">  </span><br><span class="line">  		<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mappser</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h2><ul>
+<li><if></li>
+<li><where>：条件都不成立去除where，而且会自动去除开头多余的and和or</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;name != null&quot;</span>&gt;</span></span><br><span class="line">		name like concat(&#x27;%&#x27;,#&#123;name&#125;,&#x27;%&#x27;)</span><br><span class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;gender != null&quot;</span>&gt;</span></span><br><span class="line">		and gender = #&#123;gender&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;begin != null and end != null&quot;</span>&gt;</span></span><br><span class="line">		and entrydate between #&#123;begin&#125; and #&#123;end&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;name != null&quot;</span>&gt;</span></span><br><span class="line">		name like concat(&#x27;%&#x27;,#&#123;name&#125;,&#x27;%&#x27;)</span><br><span class="line">	<span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>案例</strong></p>
+<p>动态更新</p>
+<p>alt+end，mybtisx插件自动生成sql</p>
+<ul>
+<li><set>，会自动去除后面多余的逗号</li>
+</ul>
+<p><strong>forech</strong></p>
+<ul>
+<li><foreach>遍历元素</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">delete from emp where id in</span><br><span class="line"><span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">&quot;ids&quot;</span> <span class="attr">item</span>=<span class="string">&quot;id&quot;</span> <span class="attr">separator</span>=<span class="string">&quot;,&quot;</span> <span class="attr">open</span>=<span class="string">&quot;(&quot;</span> <span class="attr">close</span>=<span class="string">&quot;)&quot;</span>&gt;</span></span><br><span class="line">	#&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Collection:遍历的集合</p>
+<p>Item:遍历出来的元素</p>
+<p>separator:分隔符</p>
+<p>open:遍历开始前拼接的SQl片段</p>
+<p>close:遍历结束后凭借的SQL片段</p>
+<p><strong>sql,include</strong></p>
+<ul>
+<li><sql>定义可重复使用的SQL片段</li>
+<li><include>通过属性refid，指定包含的SQL片段</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">&quot;xx&quot;</span>&gt;</span></span><br><span class="line">这里方重复使用的sql片段</span><br><span class="line"><span class="tag">&lt;/<span class="name">sql</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">&quot;xx&quot;</span>/&gt;</span>引用sql</span><br></pre></td></tr></table></figure>
+<h2 id="开发规范-Restful"><a href="#开发规范-Restful" class="headerlink" title="开发规范-Restful"></a>开发规范-Restful</h2><ul>
+<li>REST 表述性状态转换，他是一种软件架构风格</li>
+</ul>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/users/1 GET:查询id为1到用户</span><br><span class="line">http://localhost:8080/users		POST：新增用户</span><br><span class="line">http://localhost:8080/users		PUT：修改用户</span><br><span class="line">http://localhost:8080/users/1	DELTETE：删除id为1到用户</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>url定位资源</li>
+<li>HTTP动词描述操作</li>
+</ul>
+<p>REST是风格，是约定方式，约定不是规定，可以打破</p>
+<p>描述模块的功能通常使用复数，也就是加s的格式来描述，表示此类资源，而非耽搁资源如：users、emps、books…</p>
+<p>统一响应结果</p>
+<p>code：响应码</p>
+<p>msg：响应信息</p>
+<p>data：返回数据</p>
+<p><strong>开发流程</strong></p>
+<ol>
+<li>查看页面原型明确需求</li>
+<li>阅读接口文档</li>
+<li>思路分析</li>
+<li>接口开发</li>
+<li>接口测试</li>
+<li>前后端链调</li>
+<li>开发流程</li>
+</ol>
+<p>明确需求 接口文档 思路分析 接口开发</p>
+<ol start="2">
+<li>接口调试</li>
+</ol>
+<p>postman测试 前后端联调</p>
+<ol start="3">
+<li>日志小技巧</li>
+</ol>
+<p>@Slf4j</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log.info()</span><br></pre></td></tr></table></figure>
+<h2 id="pageHelper插件"><a href="#pageHelper插件" class="headerlink" title="pageHelper插件"></a>pageHelper插件</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 员工信息查询</span></span><br><span class="line"><span class="meta">@Select(&quot;select * from emp&quot;)</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">list</span><span class="params">()</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> PageBean <span class="title function_">page</span><span class="params">(Integer page, Integer pageSize)</span>&#123;</span><br><span class="line">  <span class="comment">// 设置分页参数</span></span><br><span class="line">  PageHelper.startPage(page,pageSize);</span><br><span class="line">  <span class="comment">// 执行查询</span></span><br><span class="line">  List&lt;Emp&gt; empList = empMapper.list();</span><br><span class="line">  Page&lt;Emp&gt; p = (Page&lt;Emp&gt;) empList;</span><br><span class="line">  <span class="comment">// 封装PageBean对象</span></span><br><span class="line">  <span class="type">PageBean</span> <span class="variable">pageBean</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PageBean</span>(p.getTotal(),p.getResult());</span><br><span class="line">  <span class="keyword">return</span> pageBean;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--PageHelper分页插件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>springboot文件上传，默认单个文件最大允许为1M，如果需要上传大文杰，可以进行如下配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">配置耽搁文件最大上传大小</span><br><span class="line">spring.servlet.multipart.max-file-size=10MB</span><br><span class="line">配置单个请求最大上传大小（一次请求可以上传多个文件）</span><br><span class="line">spring.servlet.multipart.max-request-size=100MB</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String getOriginalFilename();</td>
+<td>获取原始文件名</td>
+</tr>
+<tr>
+<td>void transferTo(File dest);</td>
+<td>将接收的文件转存到磁盘文件中</td>
+</tr>
+<tr>
+<td>Long getSize()</td>
+<td>获取文件的大小，单位，字节</td>
+</tr>
+<tr>
+<td>Byte[] getBytes();</td>
+<td>获取文件内容的字节数组</td>
+</tr>
+<tr>
+<td>InputStream getInputStream();</td>
+<td>接收到的文件内容的输入流</td>
+</tr>
+</tbody></table>
+<h2 id="yml"><a href="#yml" class="headerlink" title="yml"></a>yml</h2><ul>
+<li>大小写敏感</li>
+<li>数值前边必须有空格作为分隔符</li>
+<li>使用缩进表示层级关系，缩进时，不允许使用Tab键，只能使用空格</li>
+<li>缩进的空格数目不重要，只要相同层级的元素左侧对其即可</li>
+<li>#表示注释，从这个自负一致到行尾，都会被解析器忽略</li>
+<li>对象/Map集合</li>
+</ul>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">user:</span></span><br><span class="line">	<span class="string">name:zhangsan</span></span><br><span class="line">	<span class="attr">age:</span> <span class="number">18</span></span><br><span class="line">	<span class="attr">password:</span> <span class="number">123456</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>数组/LIst/Set集合</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">hobby:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">java</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">game</span></span><br><span class="line">	<span class="bullet">-</span> <span class="string">sport</span></span><br></pre></td></tr></table></figure>
+<p>配置文件遍历注入</p>
+<p>@Value(“${key}”)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Data //提供get set方法</span><br><span class="line">@Component //成为bean</span><br><span class="line">@ConfigurationProperties(prefix=&quot;前缀&quot;)//提供变量名的前缀</span><br></pre></td></tr></table></figure>
+<p>解决报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="数据校验"><a href="#数据校验" class="headerlink" title="数据校验"></a>数据校验</h2><h2 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h2><ul>
+<li><p>会话：用户打开浏览器，访问web服务器的资源，会话建立，知道一方断开连接，会话结束，在一次会话中可以包括多次请求和响应</p>
+</li>
+<li><p>会话跟踪：一种维护浏览器状态的方法，服务器需要识别多次请求是否来自于同一浏览器，以便在同一次会话多次请求间共享数据</p>
+</li>
+<li><p>会话跟踪方案：</p>
+<ul>
+<li>客户端会话跟踪技术：Cookie</li>
+<li>服务端会话跟踪技术：Session</li>
+<li>令牌技术</li>
+</ul>
+</li>
+</ul>
+<p><strong>Cookie</strong></p>
+<p>优点：HTTP协议中支持的技术</p>
+<p>缺点：</p>
+<ul>
+<li>移动端APP无法使用Cookie</li>
+<li>不安全，用户可以自己禁用Cookie</li>
+<li>Cookie不能跨域</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置Cookie</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/c1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">cookie1</span><span class="params">(HttpServletResponse response)</span>&#123;</span><br><span class="line">  response.addCookie(<span class="keyword">new</span> <span class="title class_">Cookie</span>(<span class="string">&quot;login_username&quot;</span>,<span class="string">&quot;itheima&quot;</span>)); <span class="comment">//设置Cookie/响应Cookie</span></span><br><span class="line">  <span class="keyword">return</span> Result.success();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获取Cookie</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/c2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">cookie2</span><span class="params">(HttpServletRequest request)</span>&#123;</span><br><span class="line">  Cookie[] cookies = request.getCookies();</span><br><span class="line">  <span class="keyword">for</span> (Cookie cookie : cookies) &#123;</span><br><span class="line">    <span class="keyword">if</span>(cookie.getName().equals(<span class="string">&quot;login_username&quot;</span>))&#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;login_username: &quot;</span>+cookie.getValue()); <span class="comment">//输出name为login_username的cookie</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Result.success();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>跨域区分三个维度：协议、ip/域名、端口号</p>
+<p>任何一个不一样，都会跨域</p>
+<h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><p>优点：存储在服务端，安全</p>
+<p>缺点：</p>
+<ul>
+<li>服务器集群环境下无法直接使用Session</li>
+<li>Cookie的缺点</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/s1&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">session1</span><span class="params">(HttpSession session)</span>&#123;</span><br><span class="line">  log.info(<span class="string">&quot;HttpSession-s1: &#123;&#125;&quot;</span>, session.hashCode());</span><br><span class="line"></span><br><span class="line">  session.setAttribute(<span class="string">&quot;loginUser&quot;</span>, <span class="string">&quot;tom&quot;</span>); <span class="comment">//往session中存储数据</span></span><br><span class="line">  <span class="keyword">return</span> Result.success();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@GetMapping(&quot;/s2&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">session2</span><span class="params">(HttpServletRequest request)</span>&#123;</span><br><span class="line">  <span class="type">HttpSession</span> <span class="variable">session</span> <span class="operator">=</span> request.getSession();</span><br><span class="line">  log.info(<span class="string">&quot;HttpSession-s2: &#123;&#125;&quot;</span>, session.hashCode());</span><br><span class="line"></span><br><span class="line">  <span class="type">Object</span> <span class="variable">loginUser</span> <span class="operator">=</span> session.getAttribute(<span class="string">&quot;loginUser&quot;</span>); <span class="comment">//从session中获取数据</span></span><br><span class="line">  log.info(<span class="string">&quot;loginUser: &#123;&#125;&quot;</span>, loginUser);</span><br><span class="line">  <span class="keyword">return</span> Result.success(loginUser);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="令牌技术"><a href="#令牌技术" class="headerlink" title="令牌技术"></a>令牌技术</h2><p><strong>优势</strong>：</p>
+<ul>
+<li>支持PC端，移动端</li>
+<li>解决集群环境下的认证问题</li>
+<li>减轻服务器存储压力</li>
+</ul>
+<p><strong>缺点</strong>：需要自己实现</p>
+<h2 id="JWT-（Json-Web-Token）"><a href="#JWT-（Json-Web-Token）" class="headerlink" title="JWT （Json Web Token）"></a>JWT （Json Web Token）</h2><p>官网：<a target="_blank" rel="noopener" href="https://jwt.io/">https://jwt.io/</a></p>
+<p>定义了一种简洁的，自包含的格式，用于通信双方一json数据格式安全的传输信息。由于数字签名的存在，这些信息是可靠的</p>
+<p><strong>组成</strong></p>
+<ul>
+<li>第一部分：Header（头），记录令牌类型、签名算法等</li>
+<li>第二部分：Payload（有效载荷），携带一些自定义信息、默认信息等</li>
+<li>第三部分：Signature（签名），防止Token被篡改、确保安全性、将header、payload、并加入指定密钥，通过指定签名算法计算而来</li>
+</ul>
+<p>Base64:是一种基于64个可打印字符（A-Z，a-z，0-9+/）来表示二进制数据等编码方式，=补位符号</p>
+<p><strong>引入JWT</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.9.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>JWT校验时使用的签名密钥，必须和生成JWT令牌时使用的密钥时配套的</p>
+<p>如果JWT令牌解析校验时报错说明被篡改或过期</p>
+<h2 id="过滤器Filter"><a href="#过滤器Filter" class="headerlink" title="过滤器Filter"></a>过滤器Filter</h2><p>概念：Filter过滤器时javaWeb三大组件（Servlet、Filter、Listenser）之一</p>
+<p>过滤器可以把对资源的请求拦截下来，从二实现一些特殊的功能</p>
+<p>过滤器一般完成一些通用的操作，比如登陆校验，统一编码处理，敏感字符处理</p>
+<p><strong>快速入门</strong></p>
+<ol>
+<li>定义Filter：定义一个类，实现Filter接口，并重写其所有方法</li>
+<li>配置Filter：Filter类上加@WebFilter(urlPatterns = “/*”)注解，配置拦截资源路径。引导类上加@ServletComponentScan开启Servlet组件支持</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@WebFilter(urlPatterns = &quot;/*&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DemoFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ServletComponentScan</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringbootItemQuickstartApplication</span> &#123;</span><br></pre></td></tr></table></figure>
+<p>放行后访问对呀资源，资源访问完成后，还会回到Filter中嘛？ 会</p>
+<p>如果回到Filter中，时重新执行还是执行放行后到逻辑呢？执行放行后逻辑</p>
+<table>
+<thead>
+<tr>
+<th>拦截路径</th>
+<th>urlPatterns值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>拦截具体</td>
+<td>/login</td>
+</tr>
+<tr>
+<td>拦截目录</td>
+<td>/emps/*</td>
+</tr>
+<tr>
+<td>拦截所有</td>
+<td>/*</td>
+</tr>
+</tbody></table>
+<p>一个web应用中，可以配置多个过滤器，这个过滤器就形成了一个过滤器链</p>
+<p>顺序：注解配置的Filter，优先级时按照过滤器类名（字符串）的自然排序</p>
+<p>快速捕获异常command+option+t</p>
+<h2 id="拦截器interceptor"><a href="#拦截器interceptor" class="headerlink" title="拦截器interceptor"></a>拦截器interceptor</h2><p><strong>快速入门</strong></p>
+<p>概念：是一种动态拦截方法调用的机制，类似于过滤器。Spring框架中提供的，用来动态拦截控制方法的执行</p>
+<p>作用：拦截请求，在指定的方法调用前后，根据业务需要执行预先设定的代码</p>
+<p><strong>定义拦截器</strong> 实现HandlerIterceptor接口，并重写所有方法</p>
+<p><strong>注册拦截器</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebConfig</span> <span class="keyword">implements</span> <span class="title class_">WebMvcConfigurer</span>&#123;</span><br><span class="line">  <span class="meta">@Autowired</span></span><br><span class="line">  <span class="keyword">private</span> LoginCheckInterceptor loginCheckInterceptor;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span>&#123;</span><br><span class="line">    registry.addIntercepttor(LoginCheckInterceptor).addPathPatterns(<span class="string">&quot;/**&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>addPathPatterns**(“/**”)需要拦截</p>
+<p>excludePathPatterns**(“/login”)不需要拦截</p>
+<table>
+<thead>
+<tr>
+<th>拦截路径</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/*</td>
+<td>一级路径</td>
+</tr>
+<tr>
+<td>/**</td>
+<td>任意级路径</td>
+</tr>
+<tr>
+<td>/depts/*</td>
+<td>/depts下的一级路径</td>
+</tr>
+<tr>
+<td>/depts/**</td>
+<td>/depts下的任意级路径</td>
+</tr>
+</tbody></table>
+<p><strong>Fillter于Interceptor</strong></p>
+<p>接口规范不同：过滤器需要实现Filter接口，二拦截器需要实现HandlerInterceptor接口</p>
+<p>拦截范围不同：过滤器Filter会拦截所有的资源，而Intercetor只会拦截Spring环境中的资源</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>方法一：在controller的方法中进行try…catch</p>
+<p>方案二：全局异常处理器 @TestControllerAdvice</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GlobalExceptionHandler</span>&#123;</span><br><span class="line">  <span class="meta">@ExceptionHandler(Exception.class)</span></span><br><span class="line">  <span class="keyword">public</span> Result <span class="title function_">ex</span><span class="params">(Exception ex)</span>&#123;</span><br><span class="line">    ex.printStackTrace();</span><br><span class="line">    <span class="keyword">return</span> Result.error(<span class="string">&quot;对不起，操作失败，请联系管理员&quot;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="事物处理-amp-AOP"><a href="#事物处理-amp-AOP" class="headerlink" title="事物处理&amp;AOP"></a>事物处理&amp;AOP</h2><p>事物是一组操作的集合，它是一个不可分割的工作单位，这些操作，要么同时成功，要么同时失败</p>
+<p>操作：</p>
+<ol>
+<li>开启事务（一组操作开始前，开始事物）：start transaction/begin；</li>
+<li>提交事物（这组操作全部成功后，提交事物）：commit；</li>
+<li>回滚事物（中间任何一个操作出现异常，回滚事物）：rollback；</li>
+</ol>
+<p><strong>@Transactional</strong></p>
+<p>位置：业务层的方法上、类上、接口上</p>
+<p>作用：将当前方法交给spring进行事物管理，方法执行前，开启事务；成功执行完毕，提交事物，出现异常，回滚事物</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#spring事务管理日志</span></span><br><span class="line"><span class="attr">logging:</span></span><br><span class="line">  <span class="attr">level:</span></span><br><span class="line">    <span class="attr">org.springframework.jdbc.support.JdbcTransactionManager:</span> <span class="string">debug</span></span><br></pre></td></tr></table></figure>
+<h2 id="事物进阶"><a href="#事物进阶" class="headerlink" title="事物进阶"></a>事物进阶</h2><p><strong>rollbackFor</strong></p>
+<p>默认情况下，只有出现RuntimeExcception才回滚异常，rollbackFor属性用于控制出现何种异常类型，回滚事物</p>
+<p><strong>propagation</strong></p>
+<p>事物传播行为：指的就是当一个事物方法被另一个事物方法调用时，这个事物方法一个如何进行事物控制</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">a</span><span class="params">()</span>&#123;</span><br><span class="line">  UserService.b();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Transactional(propagation = Propagation.REQUIRED)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">b</span><span class="params">()</span>&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>REQUIRED</td>
+<td>默认值，需要事物，有则加入，无则创建新事物</td>
+</tr>
+<tr>
+<td>REQUIRES_NEW</td>
+<td>需要新事物，无论有无，总是创建新事物</td>
+</tr>
+<tr>
+<td>SUPPORTS</td>
+<td>支持事物有则加入，无则在无事物状态中运行</td>
+</tr>
+<tr>
+<td>NOT_SUPPORTED</td>
+<td>不支持事物，在无事物状态下运行，如果当前存在已有事物，则挂起当前事物</td>
+</tr>
+<tr>
+<td>MANDATORY</td>
+<td>必须有事物，否则抛异常</td>
+</tr>
+<tr>
+<td>NEVER</td>
+<td>必须每事物，否则抛异常</td>
+</tr>
+</tbody></table>
+<h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><p>快速入门：面向切面编程，其实就是面向特定方法编程</p>
+<p>动态代理是面向切面编程最主流的实现，二springAOP是Spring框架的高级技术，旨在管理bean对象的过程中，主要通过代理机制，对特定的方法进行编程</p>
+<p>导入aop依赖</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span> <span class="comment">//声明AOP</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TimeAspect</span> &#123;</span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.itheima.*.*(..))&quot;)</span><span class="comment">//指定方法</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">recordTime</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">begin</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> joinPoint.proceed();<span class="comment">//执行方法</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        log.info(joinPoint.getSignature()+<span class="string">&quot;方法执行耗时:&#123;&#125;ms&quot;</span>,end-begin);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="AOP核心概念"><a href="#AOP核心概念" class="headerlink" title="AOP核心概念"></a>AOP核心概念</h2><p>连接点：JoinPoint,可以被AOP控制的方法（暗含执行时的相关信息)</p>
+<p>通知：Advice，指哪些重复的逻辑，也就是共性功能（最终体现为一个方法）</p>
+<p>切入点：PointCut，匹配连接点的条件，通知仅在切入点方法执行时被应用</p>
+<p>切面：Aspect，描述通知于切入点点对应关系（通知+切入点）</p>
+<p>目标对象：Target，通知所有应用对象</p>
+<h2 id="通知类型"><a href="#通知类型" class="headerlink" title="通知类型"></a>通知类型</h2><p>@Around环绕通知，次注解标注的通知方法在目标方法前，后都被执行</p>
+<p>@Before前置通知，此注解的通知方法在目标方法前执行</p>
+<p>@After 后置通知，此注解标注的通知方法后被执行，无论是否异常都会被执行</p>
+<p>@AfterReturing 返回通知，次注解标注的通知方法在目标方法后被执行，有异常不会被执行</p>
+<p>@AfterThrowing：异常后通知，此注解的通知方法发生异常后执行</p>
+<p>注意事项</p>
+<ul>
+<li>@Around环绕通知需要自己调用ProceedingJoinPoint.proceed()来让原始方法执行，其他通知不需要考虑目标执行方法</li>
+<li>@Around环绕通知方法的返回值，必须指定为Object，来接收原始方法的返回值</li>
+</ul>
+<p>切入点表达式</p>
+<p>@PointCut该注解的作用时将公共的切点表达式抽取出来，需要用到时引用该切点表达式即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut(&quot;excution(* com.itheima.service.impl.DeptServiceImpl.*(..))&quot;)</span></span><br><span class="line"></span><br><span class="line">Private <span class="keyword">void</span> <span class="title function_">pt</span><span class="params">()</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Before(&quot;pt()&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通知的执行顺序</p>
+<p>当有多个切面的切入点都匹配到了目标方法，目标方法运行时，多个通知方法都会被执行</p>
+<p>和类名字母排序有关</p>
+<p>1.不同切面类中，默认按照切面类的类名字母排序；</p>
+<p>目标方法前的通知方法：字母排名靠前的先执行</p>
+<p>目标方法后的通知方法：字母排名靠前的先执行</p>
+<p>2.@Order(num)设置执行顺序</p>
+<p>目标方法前的通知：数字小的先执行</p>
+<p>目标方法后的通知：数字小的后执行</p>
+<h2 id="切入点表达式"><a href="#切入点表达式" class="headerlink" title="切入点表达式"></a>切入点表达式</h2><p>切入点表达式：描述切入点方法的一种表达式</p>
+<p>作用：主要用来决定项目中哪些方法需要加入通知</p>
+<p>常见形式：</p>
+<ul>
+<li>execution(…)根据方法的签名来匹配</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(访问修饰符? 返回值 包名.类名.?方法名(方法参数) throws 异常?)</span><br></pre></td></tr></table></figure>
+<p>其中带？的表示可以省略的部分</p>
+<p>访问修饰符：可省略</p>
+<p>包名.类名：可省略（不建议省略）</p>
+<p>Throws 异常：可省略</p>
+<ul>
+<li>可以使哟童年通配符</li>
+</ul>
+<p>*：单个独立的任意符号，可以通配任意返回值、包名、类名、方法名、任意类型的一个参数，也可以通配包、类、方法名的一部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com.*.service.*.update*(*))</span><br></pre></td></tr></table></figure>
+<p>..：多个连续的任意符号，可以通配任意层级的包、或任意类型、任意个数的参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com.itheima..DeptService.*(..))</span><br></pre></td></tr></table></figure>
+<p>|| 或</p>
+<p>书写建议：</p>
+<p>所有业务方法名在命名时尽量规范，方便切入点表达式快速匹配</p>
+<p>描述切入点方法通常给予接口描述，而不时直接描述实现类，增强拓展性</p>
+<p>在满足业务需要的前提下，尽量缩小切入点的匹配范围。</p>
+<ul>
+<li>@annotation(…)根据注解匹配</li>
+</ul>
+<p>第一步新建一个自定义注解Mylog</p>
+<p>加两个原注解描述</p>
+<p>@Retention(RetentionPoliycy.RUNTIME)//运行时有效</p>
+<p>@Target(ElementType.METHOD)//作用目标（方法）</p>
+<p>第二部在业务方法上加@Mylog注解</p>
+<p>然后在切入点表达式</p>
+<p>@Pointcut(“@annotation(com.itheima.aop.Mylog)”)去引入这个注解</p>
+<h2 id="连接点"><a href="#连接点" class="headerlink" title="连接点"></a>连接点</h2><p>在Spring中用JoinPoint抽象了连接点，用它可以获得方法执行时的相关信息、方法名、方法参数等</p>
+<p>对于@Around通知，获取连接点信息只能使用ProceedingJoinPoint</p>
+<p>对于其他四种通知，获取连接点信息只能使用JoinPoint，它是ProceedingJoinPoint的父类型</p>
+<p>获取目标对象的类名 obj.getTarget().getClass().getName()</p>
+<p>获取目标方法的方法名obj.joinPoint.getSignature().getName();</p>
+<p>获取目标方法运行时传入的参数obj.getArgs()</p>
+<p>放行目标方法执行obj.proceed()</p>
+<p>获取目标方法运行的返回值obj就是上面proceed的返回值</p>
+<h2 id="配置优先级"><a href="#配置优先级" class="headerlink" title="配置优先级"></a>配置优先级</h2><h2 id="Maven分模块开发"><a href="#Maven分模块开发" class="headerlink" title="Maven分模块开发"></a>Maven分模块开发</h2><p>分模块开发需要先正对模块功能进行设计，再进行编码，不会先将工程开发完毕，然后进行拆分</p>
+<p>创建maven模块tlias-pojo，存放实体类</p>
+<p>创建maven模块tlias-utils，存放工具类</p>
+<p>1.创建一个maven模块，最外面的包名保持一致，吧pojo全部类复制到爆虾</p>
+<p>2.引入xml</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p><parent></parent>子标签使用这个标签说明那个是父工程</p>
+<ol>
+<li>创建maven模块tlias-parent,该工程为父工程，设置打包方式为pom：<packaging>pom</packaging></li>
+<li></li>
+<li></li>
+</ol>
+<p>一个工程只能继承一个父工程，单支持多重继承</p>
+<p>jar：普通模块打包，springboot项目基本都是jar包内嵌tomaacat运行</p>
+<p>war：普通web程序打包，需要部署在外部的tomacat服务器中运行</p>
+<p>pom：父工程或聚合工程，该模块不屑代码，进行依赖管理</p>
+<p>在子工程中，配置了继承关系之后，坐标中groupId是可以省略的，业务会自动继承父工程的</p>
+<p>relativePath指定父工程的pom文件的相对位置（如果不指定，将从本地仓库/远程仓库查找该工程）</p>
+<p>若父子工程都配置了同一个依赖的不同版本，以子工程的为标准</p>
+<h2 id="版本锁定"><a href="#版本锁定" class="headerlink" title="版本锁定"></a>版本锁定</h2><p><dependencyManagement>来统一管理依赖版本</p>
+<p>在父工程使用此标签，在子工程引入时就可以不用指定版本</p>
+<p><properties>中通过自定义集中维护版本号</p>
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p>将多个模块组装成一个整体，同时进行项目构建</p>
+<p>聚合工程：一个不具有任何业务功能的“空”工程（有切仅于一个pom文件）</p>
+<p>作用：快速构建项目</p>
+<p>maven中可以通过<modules>设置当前聚合工程所包含的子模块名称</p>
+<p>在父工程中</p>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/04/18/note-english/">英语笔记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/04/17/HCIP/">深度学习预备知识opencv笔记</a></div></section></div>
+
+
+
+
+
+
+  <div class='related-wrap md reveal' id="comments">
+    <div class='cmt-title cap theme'>
+      快来参与讨论吧
+    </div>
+    <div class='cmt-body giscus'>
+      
+
+<svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="giscus" data-repo="Alanosy/comment_blog" data-repo-id="R_kgDONlpusg" data-category="Announcements" data-category-id="DIC_kwDONlpuss4Clthk" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" data-loading="lazy" crossorigin="anonymous" src="https://giscus.app/client.js"></div>
+
+    </div>
+  </div>
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.13.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.13.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadJS() {
+    const els = document.querySelectorAll("#comments #giscus");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.log(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+    loadJS();
+  });
+</script>
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
